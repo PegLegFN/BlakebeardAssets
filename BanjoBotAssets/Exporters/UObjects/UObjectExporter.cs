@@ -18,6 +18,7 @@
 using BanjoBotAssets.UExports;
 using CUE4Parse.FN.Enums.FortniteGame;
 using System.Collections.Concurrent;
+using CUE4Parse.Utilities;
 
 namespace BanjoBotAssets.Exporters.UObjects
 {
@@ -105,7 +106,16 @@ namespace BanjoBotAssets.Exporters.UObjects
                     TAsset? uobject;
                     if (IgnoreLoadFailures)
                     {
-                        var pkg = await provider.TryLoadPackageAsync(file);
+                        IPackage? pkg = null;
+
+                        try
+                        {
+                            pkg = await provider.LoadPackageAsync(file);
+                        }
+                        catch
+                        {
+                            return;
+                        }
 
                         cancellationToken.ThrowIfCancellationRequested();
 

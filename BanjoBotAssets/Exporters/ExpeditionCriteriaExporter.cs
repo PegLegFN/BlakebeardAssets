@@ -1,9 +1,4 @@
 ﻿using CUE4Parse.UE4.Objects.GameplayTags;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BanjoBotAssets.Exporters
 {
@@ -22,7 +17,7 @@ namespace BanjoBotAssets.Exporters
             var file = provider[criteriaPath];
 
             Interlocked.Increment(ref assetsLoaded);
-            var dataTable = await provider.LoadObjectAsync<UDataTable>(file.PathWithoutExtension);
+            var dataTable = await provider.SafeLoadPackageObjectAsync<UDataTable>(file.PathWithoutExtension);
 
             if (dataTable == null)
             {
