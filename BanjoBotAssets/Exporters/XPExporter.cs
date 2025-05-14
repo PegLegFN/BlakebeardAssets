@@ -47,7 +47,7 @@ namespace BanjoBotAssets.Exporters
             var file = provider[tablePath];
             Interlocked.Increment(ref assetsLoaded);
 
-            var tableRecipes = await provider.LoadObjectAsync<UCurveTable>(file.PathWithoutExtension);
+            var tableRecipes = await provider.LoadPackageObjectAsync<UCurveTable>(file.PathWithoutExtension);
 
             if (tableRecipes is null)
             {

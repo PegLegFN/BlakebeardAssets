@@ -39,7 +39,7 @@ namespace BanjoBotAssets.Exporters.UObjects
             if(asset.GetSoftAssetPath("FixedPortrait") is string portraitPath)
             {
                 Interlocked.Increment(ref assetsLoaded);
-                var portrait = await provider.LoadObjectAsync<UObject>(portraitPath);
+                var portrait = await provider.LoadPackageObjectAsync<UObject>(portraitPath);
                 if (portrait.GetSoftAssetPath("SmallImage") is string smallPreviewPath)
                 {
                     imagePaths.Remove(ImageType.SmallPreview);

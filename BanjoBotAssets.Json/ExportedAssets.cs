@@ -30,7 +30,6 @@ namespace BanjoBotAssets.Json
         public ItemRatingTables ItemRatings { get; } = new();
         public HeroStatTable HeroStats { get; set; } = new();
 
-        public SortedDictionary<string, ExpeditionCriteria> ExpeditionCriteria { get; } = new(StringComparer.OrdinalIgnoreCase);
         public SortedDictionary<string, int[]> ItemLevelsToXP { get; } = new();
         public Dictionary<string, int> HomebaseRatingRequirements { get; set; } = [];
 

@@ -18,6 +18,7 @@
 using BanjoBotAssets.UExports;
 using CUE4Parse.FN.Enums.FortniteGame;
 using CUE4Parse.UE4.Objects.GameplayTags;
+using CUE4Parse.Utilities;
 using Microsoft.Extensions.Hosting;
 
 namespace BanjoBotAssets.Exporters.UObjects

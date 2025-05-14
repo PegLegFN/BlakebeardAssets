@@ -18,6 +18,7 @@
 using BanjoBotAssets.UExports;
 using CUE4Parse.FN.Enums.FortniteGame;
 using CUE4Parse.UE4.Objects.GameplayTags;
+using CUE4Parse.Utilities;
 using System.Collections.Concurrent;
 
 namespace BanjoBotAssets.Exporters.UObjects
@@ -143,7 +144,7 @@ namespace BanjoBotAssets.Exporters.UObjects
 
             return await cachedAmmoTypesFromPaths.GetOrAdd(ammoDataPath.AssetPathName.Text, static async (path, provider) =>
             {
-                var asset = await provider.LoadObjectAsync<UFortAmmoItemDefinition>(path);
+                var asset = await provider.LoadPackageObjectAsync<UFortAmmoItemDefinition>(path);
                 if (asset.ItemName?.Text is string str)
                 {
                     var i = str.IndexOf(':');

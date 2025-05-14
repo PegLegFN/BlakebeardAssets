@@ -244,7 +244,7 @@ namespace BanjoBotAssets.Exporters.UObjects
                     if (largePreviewPath is null && smallPreviewPath is not null)
                     {
                         string possibleLargePreviewPath = SmallIconRegex().Replace(smallPreviewPath, "$&-L");
-                        if (provider.TryFindGameFile(possibleLargePreviewPath, out var _))
+                        if (provider.TryGetGameFile(possibleLargePreviewPath, out var _))
                             largePreviewPath = possibleLargePreviewPath;
                     }
 

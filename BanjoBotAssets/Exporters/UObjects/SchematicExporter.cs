@@ -20,6 +20,7 @@ using BanjoBotAssets.UExports;
 using CUE4Parse.FN.Enums.FortniteGame;
 using CUE4Parse.UE4.Assets.Exports;
 using CUE4Parse.UE4.Objects.GameplayTags;
+using CUE4Parse.Utilities;
 using SevenZip.CommandLineParser;
 using System.Collections.Concurrent;
 using System.Data;
@@ -203,7 +204,7 @@ namespace BanjoBotAssets.Exporters.UObjects
             if (largePreviewPath is null && smallPreviewPath is not null)
             {
                 string possibleLargePreviewPath = SmallIconRegex().Replace(smallPreviewPath, "$&-L");
-                if (provider.TryFindGameFile(possibleLargePreviewPath, out var _))
+                if (provider.TryGetGameFile(possibleLargePreviewPath, out var _))
                     largePreviewPath = possibleLargePreviewPath;
             }
 
@@ -306,7 +307,7 @@ namespace BanjoBotAssets.Exporters.UObjects
             }
             var craftResultFile = provider[craftResultPath];
             Interlocked.Increment(ref assetsLoaded);
-            return await provider.LoadObjectAsync<UFortItemDefinition>(craftResultFile.PathWithoutExtension);
+            return await provider.LoadPackageObjectAsync<UFortItemDefinition>(craftResultFile.PathWithoutExtension);
         }
 
         private readonly ConcurrentDictionary<string, Task<string?>> cachedAmmoTypesFromPaths = new();
@@ -317,7 +318,7 @@ namespace BanjoBotAssets.Exporters.UObjects
 
             return await cachedAmmoTypesFromPaths.GetOrAdd(ammoDataPath.AssetPathName.Text, static async (path, provider) =>
             {
-                var asset = await provider.LoadObjectAsync<UFortAmmoItemDefinition>(path);
+                var asset = await provider.LoadPackageObjectAsync<UFortAmmoItemDefinition>(path);
                 if (asset.ItemName?.Text is string str)
                 {
                     var i = str.IndexOf(':');
