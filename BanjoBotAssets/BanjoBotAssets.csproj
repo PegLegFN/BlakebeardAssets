@@ -11,7 +11,6 @@
 		<RepositoryUrl>https://github.com/BanjoByTheBay/BanjoBotAssets.git</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageProjectUrl>https://github.com/BanjoByTheBay/BanjoBotAssets</PackageProjectUrl>
-		<BaseOutputPath>C:\Users\Tomatech\Documents\Godot Projects\PegLegGD\External\BanjoGenerator</BaseOutputPath>
 	</PropertyGroup>
 
 	<ItemGroup>
