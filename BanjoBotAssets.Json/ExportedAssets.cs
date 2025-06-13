@@ -38,7 +38,7 @@ namespace BanjoBotAssets.Json
 
         public SortedDictionary<string, string[][]> MainQuestLines { get; } = [];
 
-        public SortedDictionary<string, string[][]> EventQuestLines { get; } = [];
+        public SortedDictionary<string, QuestLineData> EventQuestLines { get; } = [];
 
         public SortedDictionary<string, VenturesSeason> VenturesSeasons { get; } = [];
 

@@ -26,8 +26,8 @@ using BanjoBotAssets.Config;
 // TODO: export per-difficulty stat clamp tables (GameDifficultyGrowthBounds, CombatStatClampsPerTheater)
 // TODO: export collection book categories and recruitment/research/voucher options (CollectionBookSlots)
 #if !RELEASE
-Console.WriteLine("type \"skip\" to skip resource extraction");
-if (Console.ReadLine() != "skip")
+//Console.WriteLine("type \"skip\" to skip resource extraction");
+//if (Console.ReadLine() != "skip")
 #endif
 {
 await Host.CreateDefaultBuilder(args)

@@ -16,6 +16,7 @@
  * along with BanjoBotAssets.  If not, see <http://www.gnu.org/licenses/>.
  */
 using CUE4Parse.FN.Structs.CoreUObject;
+using CUE4Parse.UE4.Objects.GameplayTags;
 
 namespace BanjoBotAssets.Exporters
 {
@@ -88,7 +89,7 @@ namespace BanjoBotAssets.Exporters
                     }
                     else
                     {
-                        output.AddEventQuestLine(questLine.Name, questLine.QuestPages);
+                        output.AddEventQuestLine(questLine.Name, new() { QuestPages = questLine.QuestPages, EventTag = questLine.EventTag });
                     }
                 }
             }
@@ -96,7 +97,7 @@ namespace BanjoBotAssets.Exporters
             progress.Report(new ExportProgress { TotalSteps = total, CompletedSteps = done, AssetsLoaded = assetsLoaded, CurrentItem = Resources.Status_ExportedQuestMap });
         }
 
-        private sealed record QuestLine(string Name, string[][] QuestPages, bool IsMainCampaign = false);
+        private sealed record QuestLine(string Name, string[][] QuestPages, bool IsMainCampaign = false, string? EventTag=null);
 
         private async Task<IEnumerable<QuestLine>> LoadQuestLinesAsync(ResolvedObject questMapDataAssetLink, bool isMainCampaign,
             CancellationToken cancellationToken = default)
@@ -138,8 +139,8 @@ namespace BanjoBotAssets.Exporters
                    let quests = from q in page.Get<FStructFallback[]>("QuestList")
                                 let qid = q.Get<FPrimaryAssetId>("QuestItemDefinitionId")
                                 select $"{qid.PrimaryAssetType.Name.Text}:{qid.PrimaryAssetName}"
-                   group quests.ToArray() by page.Get<FText>("PageTitle").Text into g
-                   select new QuestLine(g.Key, [.. g], isMainCampaign);
+                   group quests.ToArray() by page.Get<FText>("PageTitle").Text.Trim() into g
+                   select new QuestLine(g.Key, [.. g], isMainCampaign, uo.GetOrDefault<string?>("EventCalloutQuestFlag"));
         }
 
         protected override bool InterestedInAsset(string name) => Path.GetFileName(name).Equals("QuestMapData.uasset", StringComparison.OrdinalIgnoreCase);

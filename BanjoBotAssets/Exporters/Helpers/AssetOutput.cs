@@ -37,7 +37,7 @@ namespace BanjoBotAssets.Exporters.Helpers
         private readonly ConcurrentDictionary<string, string> displayNameCorrections = new(StringComparer.OrdinalIgnoreCase);
 
         private readonly ConcurrentDictionary<string, string[][]> mainQuestLines = new(StringComparer.OrdinalIgnoreCase);
-        private readonly ConcurrentDictionary<string, string[][]> eventQuestLines = new(StringComparer.OrdinalIgnoreCase);
+        private readonly ConcurrentDictionary<string, QuestLineData> eventQuestLines = new(StringComparer.OrdinalIgnoreCase);
 
         private readonly ConcurrentDictionary<string, ConcurrentDictionary<int, XPRewardLevel>> venturesLevelRewards = new(StringComparer.OrdinalIgnoreCase);
         private readonly ConcurrentDictionary<string, SeasonPastLevelData> venturesPastLevelRewards = new(StringComparer.OrdinalIgnoreCase);
@@ -255,7 +255,7 @@ namespace BanjoBotAssets.Exporters.Helpers
             mainQuestLines.TryAdd(name, quests);
         }
 
-        public void AddEventQuestLine(string name, string[][] quests)
+        public void AddEventQuestLine(string name, QuestLineData quests)
         {
             eventQuestLines.TryAdd(name, quests);
         }

@@ -44,7 +44,7 @@ namespace BanjoBotAssets.Exporters.UObjects
             }
 
             // TODO: use AssetRegistry to exclude non-quest assets, e.g. /Game/Items/Quests/Summer2019/SummerQuest_2019_Ice.SummerQuest_2019_Ice
-            return name.Contains("/Content/Quests/", StringComparison.OrdinalIgnoreCase);
+            return !name.Contains("/Juno/", StringComparison.OrdinalIgnoreCase) && name.Contains("/Content/Quests/", StringComparison.OrdinalIgnoreCase);
         }
 
         public override async Task ExportAssetsAsync(IProgress<ExportProgress> progress, IAssetOutput output, CancellationToken cancellationToken)
