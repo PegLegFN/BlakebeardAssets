@@ -56,7 +56,6 @@ namespace BanjoBotAssets.Exporters.Helpers
 
         public void AddHomebaseRatingRequirements(Dictionary<string, int> fortRequirements)
         {
-            //does fortRequirements get disposed at some point?
             homebaseRatingRequirements = new(fortRequirements);
         }
 
