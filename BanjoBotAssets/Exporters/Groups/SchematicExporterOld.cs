@@ -459,7 +459,7 @@ namespace BanjoBotAssets.Exporters.Groups
                     }
                 }
 
-                itemData.AlterationSlots = [.. convertedSlots];
+                //itemData.AlterationSlots = [.. convertedSlots];
             }
 
             return Task.FromResult(true);
@@ -524,7 +524,7 @@ namespace BanjoBotAssets.Exporters.Groups
             return new AlterationSlot
             {
                 RequiredLevel = slot.GetOrDefault<int>("UnlockLevel"),
-                Alterations = alterationsByRarity.OrderBy(abr => abr.rarity).Select(abr => abr.alts).ToArray(),
+                //Alterations = alterationsByRarity.OrderBy(abr => abr.rarity).Select(abr => abr.alts).ToArray(),
             };
         }
 

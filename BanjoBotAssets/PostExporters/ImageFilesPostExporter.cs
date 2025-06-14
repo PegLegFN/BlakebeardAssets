@@ -51,7 +51,7 @@ namespace BanjoBotAssets.PostExporters
 
             foreach (var (imageType, wantExport) in options.Value.Type)
             {
-                if (wantExport == WantImageExport.Yes)
+                if (wantExport == WantImageExport.Yes || wantExport == WantImageExport.ExternalPathOnly)
                 {
                     logger.LogInformation(Resources.Status_ExportingImagesType, imageType);
 
@@ -68,6 +68,10 @@ namespace BanjoBotAssets.PostExporters
                             var exportedPath = Path.Combine(options.Value.OutputDirectory, Path.ChangeExtension(transformedFilename, ".png"));
                             i.ImagePaths[imageType] = exportedPath;
                             pathsUpdated++;
+
+                            if (wantExport == WantImageExport.ExternalPathOnly)
+                                continue;
+                            logger.LogInformation("bad");
 
                             if (!novel)
                             {

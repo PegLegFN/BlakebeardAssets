@@ -225,18 +225,18 @@ namespace BanjoBotAssets.Exporters.UObjects
             }
             else if (rangedWeaponsTable?.TryGetValue(statRow, out var rangedStats) ?? false)
             {
-                var ammoType = await AmmoTypeFromPathAsync(craftingResultItem.GetOrDefault<FSoftObjectPath>("AmmoData"));
-                itemData.RangedWeaponStats = WeaponExporter.ConvertRangedWeaponStats(rangedStats, ammoType, rarity, durabilityTable);
+                //var ammoType = await AmmoTypeFromPathAsync(craftingResultItem.GetOrDefault<FSoftObjectPath>("AmmoData"));
+                //itemData.RangedWeaponStats = WeaponExporter.ConvertRangedWeaponStats(rangedStats, ammoType, rarity, durabilityTable);
                 namedWeightRow ??= rangedStats.GetOrDefault<FName>("NamedWeightRow").Text;
             }
             else if (meleeWeaponsTable?.TryGetValue(statRow, out var meleeStats) ?? false)
             {
-                itemData.MeleeWeaponStats = WeaponExporter.ConvertMeleeWeaponStats(meleeStats, rarity, durabilityTable);
+                //itemData.MeleeWeaponStats = WeaponExporter.ConvertMeleeWeaponStats(meleeStats, rarity, durabilityTable);
                 namedWeightRow ??= meleeStats.GetOrDefault<FName>("NamedWeightRow").Text;
             }
             else if (trapsTable?.TryGetValue(statRow, out var trapStats) ?? false)
             {
-                itemData.TrapStats = TrapExporter.ConvertTrapStats(trapStats, rarity, durabilityTable);
+                //itemData.TrapStats = TrapExporter.ConvertTrapStats(trapStats, rarity, durabilityTable);
                 namedWeightRow ??= trapStats.GetOrDefault<FName>("NamedWeightRow").Text;
             }
             else
@@ -252,33 +252,20 @@ namespace BanjoBotAssets.Exporters.UObjects
                 itemData.CraftingCost = craftingRecipeData.Cost!;
             }
 
-            var alterationSlotsLoadoutRow = craftingResultItem.GetOrDefault<FName>("AlterationSlotsLoadoutRow").Text;
-            if (slotLoadoutsTable?.TryGetValue(alterationSlotsLoadoutRow, out var slotLoadout) == true &&
+            itemData.AlterationLoadoutRow = craftingResultItem.GetOrDefault<FName>("AlterationSlotsLoadoutRow").Text;
+            if (itemData.AlterationLoadoutRow == "SlotLoadout.Null")
+                itemData.AlterationLoadoutRow = "None";
+            if (slotLoadoutsTable?.TryGetValue(itemData.AlterationLoadoutRow, out var slotLoadout) == true &&
                 slotLoadout.GetOrDefault<FStructFallback[]>("AlterationSlots") is FStructFallback[] slots)
             {
-                ISet<string> namedExclusions;
+                string[]? namedExclusions = null;
                 if (namedWeightRow != null && namedExclusionsTable != null && namedExclusionsTable.TryGetValue(namedWeightRow, out var group))
                 {
-                    namedExclusions = new HashSet<string>(group.GetOrDefault<string[]>("ExclusionNames"));
-                }
-                else
-                {
-                    namedExclusions = new HashSet<string>(0);
+                    var altExclusions = slots.SelectMany(AlterationNamedExclusions).Distinct();
+                    namedExclusions = group.GetOrDefault<string[]>("ExclusionNames").Intersect(altExclusions).ToArray();
                 }
 
-                var convertedSlots = new List<AlterationSlot>(slots.Length);
-
-                foreach (var slot in slots)
-                {
-                    var unlockRarity = slot.GetOrDefault("UnlockRarity", EFortRarity.Uncommon);
-                    if (unlockRarity <= rarity &&
-                        ConvertAlterationSlot(slot, namedExclusions) is AlterationSlot converted)
-                    {
-                        convertedSlots.Add(converted);
-                    }
-                }
-
-                itemData.AlterationSlots = [.. convertedSlots];
+                itemData.AlterationNamedExclusions = (namedExclusions?.Length ?? 0) > 0 ? namedExclusions : null;
             }
 
             return true;
@@ -310,68 +297,95 @@ namespace BanjoBotAssets.Exporters.UObjects
             return await provider.LoadPackageObjectAsync<UFortItemDefinition>(craftResultFile.PathWithoutExtension);
         }
 
-        private readonly ConcurrentDictionary<string, Task<string?>> cachedAmmoTypesFromPaths = new();
-        private async Task<string?> AmmoTypeFromPathAsync(FSoftObjectPath ammoDataPath)
-        {
-            if (ammoDataPath.AssetPathName.IsNone)
-                return null;
+        //private readonly ConcurrentDictionary<string, Task<string?>> cachedAmmoTypesFromPaths = new();
+        //private async Task<string?> AmmoTypeFromPathAsync(FSoftObjectPath ammoDataPath)
+        //{
+        //    if (ammoDataPath.AssetPathName.IsNone)
+        //        return null;
 
-            return await cachedAmmoTypesFromPaths.GetOrAdd(ammoDataPath.AssetPathName.Text, static async (path, provider) =>
-            {
-                var asset = await provider.LoadPackageObjectAsync<UFortAmmoItemDefinition>(path);
-                if (asset.ItemName?.Text is string str)
-                {
-                    var i = str.IndexOf(':');
-                    return str[(i + 1)..].Trim();
-                }
-                return null;
-            }, provider);
-        }
+        //    return await cachedAmmoTypesFromPaths.GetOrAdd(ammoDataPath.AssetPathName.Text, static async (path, provider) =>
+        //    {
+        //        var asset = await provider.LoadPackageObjectAsync<UFortAmmoItemDefinition>(path);
+        //        if (asset.ItemName?.Text is string str)
+        //        {
+        //            var i = str.IndexOf(':');
+        //            return str[(i + 1)..].Trim();
+        //        }
+        //        return null;
+        //    }, provider);
+        //}
 
-        private AlterationSlot? ConvertAlterationSlot(FStructFallback slot, ISet<string> namedExclusions)
+        //private AlterationSlot? ConvertAlterationSlot(FStructFallback slot, ISet<string> namedExclusions)
+        //{
+        //    if (slotDefsTable == null || alterationGroupTable == null)
+        //        return null;
+
+        //    var alterationsByRarity = new List<(EFortRarity rarity, string[] alts)>(EFortRarity.Legendary - EFortRarity.Common + 1);
+
+        //    var slotDefRow = slot.GetOrDefault<FName>("SlotDefinitionRow").Text;
+
+        //    if (!slotDefsTable.TryGetValue(slotDefRow, out var slotDef))
+        //        return null;
+
+        //    var altGroupRow = slotDef.GetOrDefault<FName>("InitTierGroup").Text;
+
+        //    var respecCost = slotDef.GetOrDefault<FFortItemQuantityPair[]>("BaseRespecCosts")?.ToDictionary(
+        //            p => $"{p.ItemPrimaryAssetId.PrimaryAssetType.Name.Text}:{p.ItemPrimaryAssetId.PrimaryAssetName.Text}",
+        //            p => p.Quantity,
+        //            StringComparer.OrdinalIgnoreCase
+        //        );
+
+        //    if (!alterationGroupTable.TryGetValue(altGroupRow, out var altGroup))
+        //        return null;
+
+        //    var mapping = altGroup.GetOrDefault("RarityMapping", new UScriptMap());
+
+        //    foreach (var (k, v) in mapping.Properties)
+        //    {
+        //        if (k?.GetValue(typeof(EFortRarity)) is EFortRarity rarity &&
+        //            v?.GenericValue is FScriptStruct { StructType: FStructFallback weightedAlts })
+        //        {
+        //            var alts = weightedAlts.GetOrDefault<FStructFallback[]>("WeightData")
+        //                .Where(wd => !namedExclusions.Overlaps(wd.GetOrDefault<string[]>("ExclusionNames")))
+        //                .Select(wd => wd.GetOrDefault<string>("AID"))
+        //                .ToArray();
+        //            alterationsByRarity.Add((rarity, alts));
+        //        }
+        //    }
+
+        //    return new AlterationSlot
+        //    {
+        //        RequiredLevel = slot.GetOrDefault<int>("UnlockLevel"),
+        //        Alterations = alterationsByRarity.OrderBy(abr => abr.rarity).Select(abr => abr.alts).ToArray(),
+        //        BaseRespecCost = respecCost?.Count == 0 ? null : respecCost
+        //    };
+        //}
+
+        private string[] AlterationNamedExclusions(FStructFallback slot)
         {
             if (slotDefsTable == null || alterationGroupTable == null)
-                return null;
-
-            var alterationsByRarity = new List<(EFortRarity rarity, string[] alts)>(EFortRarity.Legendary - EFortRarity.Common + 1);
+                return [];
 
             var slotDefRow = slot.GetOrDefault<FName>("SlotDefinitionRow").Text;
 
             if (!slotDefsTable.TryGetValue(slotDefRow, out var slotDef))
-                return null;
+                return [];
 
             var altGroupRow = slotDef.GetOrDefault<FName>("InitTierGroup").Text;
 
-            var respecCost = slotDef.GetOrDefault<FFortItemQuantityPair[]>("BaseRespecCosts")?.ToDictionary(
-                    p => $"{p.ItemPrimaryAssetId.PrimaryAssetType.Name.Text}:{p.ItemPrimaryAssetId.PrimaryAssetName.Text}",
-                    p => p.Quantity,
-                    StringComparer.OrdinalIgnoreCase
-                );
-
             if (!alterationGroupTable.TryGetValue(altGroupRow, out var altGroup))
-                return null;
+                return [];
 
             var mapping = altGroup.GetOrDefault("RarityMapping", new UScriptMap());
+            var firstMapping = mapping.Properties.Values.FirstOrDefault();
 
-            foreach (var (k, v) in mapping.Properties)
-            {
-                if (k?.GetValue(typeof(EFortRarity)) is EFortRarity rarity &&
-                    v?.GenericValue is FScriptStruct { StructType: FStructFallback weightedAlts })
-                {
-                    var alts = weightedAlts.GetOrDefault<FStructFallback[]>("WeightData")
-                        .Where(wd => !namedExclusions.Overlaps(wd.GetOrDefault<string[]>("ExclusionNames")))
-                        .Select(wd => wd.GetOrDefault<string>("AID"))
-                        .ToArray();
-                    alterationsByRarity.Add((rarity, alts));
-                }
-            }
+            if (firstMapping?.GenericValue is not FScriptStruct { StructType: FStructFallback weightedAlts })
+                return [];
 
-            return new AlterationSlot
-            {
-                RequiredLevel = slot.GetOrDefault<int>("UnlockLevel"),
-                Alterations = alterationsByRarity.OrderBy(abr => abr.rarity).Select(abr => abr.alts).ToArray(),
-                BaseRespecCost = respecCost?.Count == 0 ? null : respecCost
-            };
+            return weightedAlts
+                .GetOrDefault<FStructFallback[]>("WeightData")
+                .SelectMany(wd => wd.GetOrDefault<string[]>("ExclusionNames"))
+                .ToArray();
         }
     }
 }

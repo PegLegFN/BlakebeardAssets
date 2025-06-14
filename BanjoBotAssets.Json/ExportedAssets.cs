@@ -30,8 +30,9 @@ namespace BanjoBotAssets.Json
         public ItemRatingTables ItemRatings { get; } = new();
         public HeroStatTable HeroStats { get; set; } = new();
 
-        public SortedDictionary<string, int[]> ItemLevelsToXP { get; } = new();
+        public SortedDictionary<string, int[]> ItemLevelsToXP { get; } = [];
         public Dictionary<string, int> HomebaseRatingRequirements { get; set; } = [];
+        public Dictionary<string, AlterationSlot[]> AlterationLoadouts { get; set; } = [];
 
         public SortedDictionary<string, ExpeditionCriteria> ExpeditionCriteria { get; } = new(StringComparer.OrdinalIgnoreCase);
         public SortedDictionary<string, DifficultyInfo> DifficultyInfo { get; } = new(StringComparer.OrdinalIgnoreCase);
@@ -51,6 +52,8 @@ namespace BanjoBotAssets.Json
             ExportedAt = other.ExportedAt;
 
             HomebaseRatingRequirements = other.HomebaseRatingRequirements;
+
+            AlterationLoadouts = other.AlterationLoadouts;
 
             if (other.NamedItems != null)
             {
@@ -90,6 +93,14 @@ namespace BanjoBotAssets.Json
                 foreach (var (k, v) in other.ItemLevelsToXP)
                 {
                     ItemLevelsToXP[k] = v;
+                }
+            }
+
+            if (other.AlterationLoadouts != null)
+            {
+                foreach (var (k, v) in other.AlterationLoadouts)
+                {
+                    AlterationLoadouts[k] = v;
                 }
             }
 

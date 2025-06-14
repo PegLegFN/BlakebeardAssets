@@ -27,6 +27,7 @@ namespace BanjoBotAssets.Config
     {
         No,
         PathOnly,
+        ExternalPathOnly,
         Yes,
     }
 }

@@ -26,8 +26,11 @@ namespace BanjoBotAssets.Json
     {
         public string? Category { get; set; }
         public string? EvoType { get; set; }
-        [DisallowNull]
-        public AlterationSlot[]? AlterationSlots { get; set; }
+        [DefaultValue("None")]
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        public string? AlterationLoadoutRow { get; set; }
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate, NullValueHandling = NullValueHandling.Ignore)]
+        public string[]? AlterationNamedExclusions { get; set; }
         public string? TriggerType { get; set; }
         public string? DisplayTier { get; set; }
 

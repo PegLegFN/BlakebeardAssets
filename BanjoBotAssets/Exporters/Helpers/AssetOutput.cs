@@ -23,9 +23,10 @@ namespace BanjoBotAssets.Exporters.Helpers
     internal sealed class AssetOutput : IAssetOutput
     {
         private HeroStatTable? heroStats;
-        private Dictionary<string, int> homebaseRatingRequirements;
+        private Dictionary<string, int> homebaseRatingRequirements = [];
         private ItemRatingTable? defaultItemRatings, survivorItemRatings, leadSurvivorItemRatings;
         private Dictionary<string, int[]>? levelToXP;
+        private Dictionary<string, AlterationSlot[]> alterationLoadouts = [];
 
         private readonly ConcurrentDictionary<string, NamedItemData> namedItems = new(StringComparer.OrdinalIgnoreCase);
         private readonly ConcurrentDictionary<ImageType, ConcurrentDictionary<string, string>> namedItemImages = new();
@@ -99,11 +100,18 @@ namespace BanjoBotAssets.Exporters.Helpers
             levelToXP = levelToXPTable;
         }
 
+        public void AddAlterationLoadouts(Dictionary<string, AlterationSlot[]> loadouts)
+        {
+            alterationLoadouts = loadouts;
+        }
+
         public void CopyTo(ExportedAssets exportedAssets, IList<ExportedRecipe> exportedRecipes, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
             exportedAssets.HomebaseRatingRequirements = homebaseRatingRequirements;
+
+            exportedAssets.AlterationLoadouts = alterationLoadouts;
 
             foreach (var (k, v) in namedItems)
             {

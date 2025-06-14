@@ -24,8 +24,19 @@ namespace BanjoBotAssets.Json
     {
         public int RequiredLevel { get; set; }
         [DisallowNull]
-        public string[][]? Alterations { get; set; }
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public string? RequiredRarity { get; set; }
+        [DisallowNull]
+        public RawAlteration[]? RawAlterations { get; set; }
+
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate, NullValueHandling = NullValueHandling.Ignore)]
         public Dictionary<string, int>? BaseRespecCost { get; set; }
+    }
+
+    public sealed class RawAlteration
+    {
+        [DisallowNull]
+        public string? AID { get; set; }
+        [DisallowNull]
+        public string[]? ExclusionNames { get; set; }
     }
 }

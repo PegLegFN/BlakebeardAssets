@@ -44,6 +44,8 @@ namespace BanjoBotAssets.Exporters.Helpers
 
         public void AddLevelToXPTable(Dictionary<string, int[]> levelToXPTable);
 
+        void AddAlterationLoadouts(Dictionary<string, AlterationSlot[]> loadouts);
+
         void AddCraftingRecipe(string name, IReadOnlyDictionary<string, int> ingredients);
         void AddDisplayNameCorrection(string schematicTemplateId, string v);
 
