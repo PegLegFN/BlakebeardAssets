@@ -36,7 +36,7 @@ namespace BanjoBotAssets.Exporters
             progress.Report(new ExportProgress { TotalSteps = 1, CompletedSteps = 1, AssetsLoaded = assetsLoaded, CurrentItem = Resources.Status_ExportedItemRatings });
         }
 
-        private async Task<Dictionary<string, int>?> ExportHomebaseRatings()
+        private async Task<Dictionary<int, int>?> ExportHomebaseRatings()
         {
             var tablePath = assetPaths.Find(p => Path.GetFileNameWithoutExtension(p).Equals("HomebaseRatingMapping", StringComparison.OrdinalIgnoreCase));
 
@@ -62,7 +62,7 @@ namespace BanjoBotAssets.Exporters
             if(rowKeys is null)
                 return null;
 
-            return rowKeys.ToDictionary(fk => ((int)fk.Time).ToString(CultureInfo.InvariantCulture), fk => (int)fk.Value);
+            return rowKeys.ToDictionary(fk => (int)fk.Time, fk => (int)fk.Value);
             //int[] result = new int[rowKeys.Max(k => (int)k.Value) + 1];
             //result[0] = 0;
             //for (var i = 0; i < rowKeys.Length-1; i++)

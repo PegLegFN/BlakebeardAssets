@@ -37,7 +37,7 @@ namespace BanjoBotAssets.Exporters.Helpers
         void AddDifficultyInfo(string name, DifficultyInfo difficultyInfo);
 
         void AddHeroStats(HeroStatTable itemRatings);
-        void AddHomebaseRatingRequirements(Dictionary<string, int> fortRequirements);
+        void AddHomebaseRatingRequirements(Dictionary<int, int> fortRequirements);
         void AddDefaultItemRatings(ItemRatingTable itemRatings);
         void AddSurvivorItemRatings(ItemRatingTable itemRatings);
         void AddLeadSurvivorItemRatings(ItemRatingTable itemRatings);

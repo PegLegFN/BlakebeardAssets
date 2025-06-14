@@ -1,4 +1,5 @@
 ﻿using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Text.Json.Nodes;
 
 namespace BanjoBotAssets
@@ -36,7 +37,7 @@ namespace BanjoBotAssets
             int nextIndex = 0;
 
             ConcurrentDictionary<string, ConcurrentDictionary<string, JsonNode?>> splitItems = [];
-            ConcurrentDictionary<string, JsonObject> splitNonItems = [];
+            ConcurrentDictionary<string, JsonNode> splitNonItems = [];
 
             void ProcessItem()
             {
@@ -80,12 +81,8 @@ namespace BanjoBotAssets
             {
                 if (remainingData.Key == "NamedItems")
                     return;
-                string? stringified = remainingData.Value?.ToString();
-                if (stringified?.StartsWith("{", StringComparison.CurrentCulture) != true)
-                    return;
-                JsonObject? remainingObj = JsonNode.Parse(stringified ?? "{}")?.AsObject();
-                if (remainingObj is not null)
-                    splitNonItems.TryAdd(remainingData.Key, remainingObj);
+                if(remainingData.Value is JsonObject || remainingData.Value is JsonArray)
+                    splitNonItems.TryAdd(remainingData.Key, remainingData.Value);
             });
 
             Directory.CreateDirectory($"{destinationDir.FullName}/NamedItems");

@@ -23,7 +23,7 @@ namespace BanjoBotAssets.Exporters.Helpers
     internal sealed class AssetOutput : IAssetOutput
     {
         private HeroStatTable? heroStats;
-        private Dictionary<string, int> homebaseRatingRequirements = [];
+        private Dictionary<int, int> homebaseRatingRequirements = [];
         private ItemRatingTable? defaultItemRatings, survivorItemRatings, leadSurvivorItemRatings;
         private Dictionary<string, int[]>? levelToXP;
         private Dictionary<string, AlterationSlot[]> alterationLoadouts = [];
@@ -54,7 +54,7 @@ namespace BanjoBotAssets.Exporters.Helpers
             this.heroStats = heroStats;
         }
 
-        public void AddHomebaseRatingRequirements(Dictionary<string, int> fortRequirements)
+        public void AddHomebaseRatingRequirements(Dictionary<int, int> fortRequirements)
         {
             homebaseRatingRequirements = new(fortRequirements);
         }
@@ -135,9 +135,9 @@ namespace BanjoBotAssets.Exporters.Helpers
 
             cancellationToken.ThrowIfCancellationRequested();
 
-            foreach (var (k, v) in homebaseRatingRequirements)
+            if (homebaseRatingRequirements.Count > 0)
             {
-                exportedAssets.HomebaseRatingRequirements.TryAdd(k, v);
+                exportedAssets.HomebaseRatingRequirements = [.. homebaseRatingRequirements];
             }
 
             cancellationToken.ThrowIfCancellationRequested();
