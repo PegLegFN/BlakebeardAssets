@@ -60,12 +60,17 @@ await Host.CreateDefaultBuilder(args)
 string pegLegDestination = Path.GetFullPath("PegLegAssets", Environment.CurrentDirectory);
 #if !RELEASE
 Console.WriteLine("type \"skip\" to skip pegleg post processing");
-//pegLegDestination = @"C:\Users\Tomatech\Documents\Godot Projects\PegLegGD\External\Banjo";
+pegLegDestination = @"C:\Users\Tomatech\Repositories\TomatechGames\Godot Projects\PegLegResourcePackager\PegLegResources\GameAssets";
 if (Console.ReadLine() != "skip")
 #endif
 {
-    if(!Directory.Exists(pegLegDestination))
-        Directory.CreateDirectory(pegLegDestination);
+    if (!Directory.Exists(pegLegDestination))
+    {
+        if (pegLegDestination.StartsWith(@"C:\Users\Tomatech", StringComparison.OrdinalIgnoreCase))
+            return Environment.ExitCode;
+        else
+            Directory.CreateDirectory(pegLegDestination);
+    }
     PegLegPostProcessor.PostProcessBanjoAssets(Environment.CurrentDirectory, pegLegDestination, PegLegPostProcessor.ImageMode.Move);
 }
 
