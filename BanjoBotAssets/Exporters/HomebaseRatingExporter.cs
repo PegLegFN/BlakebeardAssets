@@ -31,7 +31,7 @@ namespace BanjoBotAssets.Exporters
 
             var ratings = await ExportHomebaseRatings();
             if (ratings is not null)
-                output.AddHomebaseRatingRequirements(ratings ?? []);
+                output.AddHomebaseRatingRequirements(ratings);
 
             progress.Report(new ExportProgress { TotalSteps = 1, CompletedSteps = 1, AssetsLoaded = assetsLoaded, CurrentItem = Resources.Status_ExportedItemRatings });
         }

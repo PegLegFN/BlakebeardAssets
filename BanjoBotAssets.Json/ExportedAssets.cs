@@ -53,8 +53,6 @@ namespace BanjoBotAssets.Json
 
             HomebaseRatingRequirements = other.HomebaseRatingRequirements;
 
-            AlterationLoadouts = other.AlterationLoadouts;
-
             if (other.NamedItems != null)
             {
                 foreach (var (k, v) in other.NamedItems)

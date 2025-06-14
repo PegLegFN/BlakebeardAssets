@@ -56,7 +56,8 @@ namespace BanjoBotAssets.Exporters.Helpers
 
         public void AddHomebaseRatingRequirements(Dictionary<string, int> fortRequirements)
         {
-            homebaseRatingRequirements = fortRequirements;
+            //does fortRequirements get disposed at some point?
+            homebaseRatingRequirements = new(fortRequirements);
         }
 
         public void AddDefaultItemRatings(ItemRatingTable itemRatings)
@@ -109,10 +110,6 @@ namespace BanjoBotAssets.Exporters.Helpers
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            exportedAssets.HomebaseRatingRequirements = homebaseRatingRequirements;
-
-            exportedAssets.AlterationLoadouts = alterationLoadouts;
-
             foreach (var (k, v) in namedItems)
             {
                 exportedAssets.NamedItems.TryAdd(k, v);
@@ -135,6 +132,20 @@ namespace BanjoBotAssets.Exporters.Helpers
             foreach (var (k, v) in expeditionCriteria)
             {
                 exportedAssets.ExpeditionCriteria.TryAdd(k, v);
+            }
+
+            cancellationToken.ThrowIfCancellationRequested();
+
+            foreach (var (k, v) in homebaseRatingRequirements)
+            {
+                exportedAssets.HomebaseRatingRequirements.TryAdd(k, v);
+            }
+
+            cancellationToken.ThrowIfCancellationRequested();
+
+            foreach (var (k, v) in alterationLoadouts)
+            {
+                exportedAssets.AlterationLoadouts.TryAdd(k, v);
             }
 
             cancellationToken.ThrowIfCancellationRequested();

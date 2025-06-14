@@ -66,7 +66,7 @@ namespace BanjoBotAssets.Exporters
             Dictionary<string, AlterationSlot[]> slotDict = [];
             foreach (var kvp in slotLoadoutsTable)
             {
-                logger.LogInformation($"Processing Alteration Loadout {kvp.Key}");
+                //logger.LogInformation($"Processing Alteration Loadout {kvp.Key}");
                 var slots = kvp.Value.GetOrDefault<FStructFallback[]>("AlterationSlots").Select<FStructFallback, AlterationSlot>(slotData =>
                 {
                     var slotDefRow = slotData.GetOrDefault<FName>("SlotDefinitionRow").Text;
