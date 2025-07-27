@@ -31,7 +31,7 @@ namespace BanjoBotAssets.Json
         public HeroStatTable HeroStats { get; set; } = new();
 
         public SortedDictionary<string, int[]> ItemLevelsToXP { get; } = [];
-        public KeyValuePair<int, int>[] HomebaseRatingRequirements { get; set; } = [];
+        public KeyValuePair<int, int>[] HomebaseRatingMap { get; set; } = [];
         public SortedDictionary<string, AlterationSlot[]> AlterationLoadouts { get; set; } = [];
 
         public SortedDictionary<string, ExpeditionCriteria> ExpeditionCriteria { get; } = new(StringComparer.OrdinalIgnoreCase);
@@ -51,7 +51,7 @@ namespace BanjoBotAssets.Json
         {
             ExportedAt = other.ExportedAt;
 
-            HomebaseRatingRequirements = other.HomebaseRatingRequirements;
+            HomebaseRatingMap = other.HomebaseRatingMap;
 
             if (other.NamedItems != null)
             {

@@ -137,7 +137,7 @@ namespace BanjoBotAssets.Exporters.Helpers
 
             if (homebaseRatingRequirements.Count > 0)
             {
-                exportedAssets.HomebaseRatingRequirements = [.. homebaseRatingRequirements];
+                exportedAssets.HomebaseRatingMap = [.. homebaseRatingRequirements];
             }
 
             cancellationToken.ThrowIfCancellationRequested();
