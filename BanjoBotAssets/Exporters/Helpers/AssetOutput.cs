@@ -244,16 +244,16 @@ namespace BanjoBotAssets.Exporters.Helpers
 
                         foreach (var (pastLevel, data) in seasonPastLevelData.Rewards)
                         {
-                            var seasonLevel = new VenturesSeasonLevel()
-                            {
-                                IsMajorReward = data.IsMajorReward,
-                                TotalRequiredXP = data.TotalRequiredXP,
-                            };
-                            for (int i = 0; i < data.Rewards.Length; i++)
-                            {
-                                seasonLevel.Rewards.Add(data.Rewards[i]);
-                            }
-                            season.PastLevels.Add(seasonLevel.Rewards);
+                            //var seasonLevel = new VenturesSeasonLevel()
+                            //{
+                            //    IsMajorReward = data.IsMajorReward,
+                            //    TotalRequiredXP = data.TotalRequiredXP,
+                            //};
+                            //for (int i = 0; i < data.Rewards.Length; i++)
+                            //{
+                            //    seasonLevel.Rewards.Add(data.Rewards[i]);
+                            //}
+                            season.PastLevels.Add(data.Rewards[0]);
                         }
                     }
 

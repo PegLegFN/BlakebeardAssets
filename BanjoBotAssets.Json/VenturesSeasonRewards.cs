@@ -32,7 +32,7 @@ namespace BanjoBotAssets.Json
         public string? EventCurrency { get; set; }
         public string? DominantElement { get; set; }
         public IList<VenturesSeasonLevel> Levels { get; } = [];
-        public IList<IList<QuestReward>> PastLevels { get; } = [];
+        public IList<QuestReward> PastLevels { get; } = [];
         public int PastLevelXPRequirement { get; set; }
     }
 
