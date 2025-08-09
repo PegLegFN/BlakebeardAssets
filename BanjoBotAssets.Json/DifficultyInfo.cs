@@ -21,6 +21,7 @@ namespace BanjoBotAssets.Json
 {
     public sealed class DifficultyInfo
     {
+        public int DifficultyLevel { get; set; }
         public int RequiredRating { get; set; }
         public int MaximumRating { get; set; }
         public int RecommendedRating { get; set; }

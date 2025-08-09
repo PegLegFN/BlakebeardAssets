@@ -42,6 +42,7 @@ namespace BanjoBotAssets.Exporters
 
             foreach (var (rowKey, data) in dataTable.RowMap)
             {
+                var difficultyLevel = data.GetOrDefault<int>("Difficulty");
                 var requiredRating = data.GetOrDefault<int>("RequiredRating");
                 var maximumRating = data.GetOrDefault<int>("MaximumRating");
                 var recommendedRating = data.GetOrDefault<int>("RecommendedRating");
@@ -49,6 +50,7 @@ namespace BanjoBotAssets.Exporters
 
                 output.AddDifficultyInfo(rowKey.Text, new DifficultyInfo
                 {
+                    DifficultyLevel = difficultyLevel,
                     RequiredRating = requiredRating,
                     MaximumRating = maximumRating,
                     RecommendedRating = recommendedRating,
