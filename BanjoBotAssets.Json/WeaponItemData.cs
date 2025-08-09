@@ -16,6 +16,7 @@
  * along with BanjoBotAssets.  If not, see <http://www.gnu.org/licenses/>.
  */
 using Newtonsoft.Json;
+using System.Text.Json.Nodes;
 
 namespace BanjoBotAssets.Json
 {
@@ -31,6 +32,8 @@ namespace BanjoBotAssets.Json
         public Dictionary<string, int>? DismantleResults { get; set; }
         public RangedWeaponStats? RangedWeaponStats { get; set; }
         public MeleeWeaponStats? MeleeWeaponStats { get; set; }
+        public string? RawWeaponStatRow { get; set; }
+        public Dictionary<string, float>? RawWeaponStats { get; set; }
     }
 
     /// <summary>

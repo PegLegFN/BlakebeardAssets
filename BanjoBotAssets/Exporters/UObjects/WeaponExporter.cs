@@ -20,6 +20,8 @@ using CUE4Parse.FN.Enums.FortniteGame;
 using CUE4Parse.UE4.Objects.GameplayTags;
 using CUE4Parse.Utilities;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Text.Json.Nodes;
 
 namespace BanjoBotAssets.Exporters.UObjects
 {
@@ -123,10 +125,16 @@ namespace BanjoBotAssets.Exporters.UObjects
             {
                 var ammoType = await AmmoTypeFromPathAsync(asset.GetOrDefault<FSoftObjectPath>("AmmoData"));
                 itemData.RangedWeaponStats = ConvertRangedWeaponStats(rangedStats, ammoType, rarity, durabilityTable);
+
+                itemData.RawWeaponStatRow = statRow;
+                itemData.RawWeaponStats = ConvertRawWeaponStats(rangedStats);
             }
             else if (meleeWeaponsTable?.TryGetValue(statRow, out var meleeStats) ?? false)
             {
                 itemData.MeleeWeaponStats = ConvertMeleeWeaponStats(meleeStats, rarity, durabilityTable);
+
+                itemData.RawWeaponStatRow = statRow;
+                itemData.RawWeaponStats = ConvertRawWeaponStats(meleeStats);
             }
             else
             {
@@ -286,6 +294,17 @@ namespace BanjoBotAssets.Exporters.UObjects
             var durabilityRow = row.GetOrDefault<FName>("DurabilityRowName").Text;
             result.Durability = durabilityTable?[durabilityRow].GetOrDefault<int>(rarity.GetNameText().Text);
 
+            return result;
+        }
+
+        public static Dictionary<string, float> ConvertRawWeaponStats(FStructFallback row)
+        {
+            Dictionary<string, float> result = [];
+            foreach (var tag in row.Properties)
+            {
+                if(tag.PropertyType.Text == "FloatProperty")
+                    result.TryAdd(tag.Name.Text, tag.Tag?.GetValue<float>() ?? 0);
+            }
             return result;
         }
     }
