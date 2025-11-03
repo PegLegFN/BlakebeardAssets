@@ -159,7 +159,7 @@ namespace BanjoBotAssets.Exporters.Groups
 
                         var itemData = new TItemData
                         {
-                            AssetPath = provider.FixPath(Path.Combine(Path.GetDirectoryName(path)!, Path.GetFileNameWithoutExtension(path))),
+                            //AssetPath = provider.FixPath(Path.Combine(Path.GetDirectoryName(path)!, Path.GetFileNameWithoutExtension(path))),
                             Description = GetDescription(parsed, asset, fields),
                             DisplayName = GetDisplayName(parsed, asset, fields).Trim(),
                             Name = Path.GetFileNameWithoutExtension(path),

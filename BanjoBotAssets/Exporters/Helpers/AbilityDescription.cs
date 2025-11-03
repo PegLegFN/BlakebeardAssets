@@ -25,17 +25,17 @@ namespace BanjoBotAssets.Exporters.Helpers
     {
         public async Task<string?> GetForPerkAbilityKitAsync(UObject grantedAbilityKit, IAssetCounter assetCounter)
         {
-            var (markup, cdo) = await GetMarkupAsync(grantedAbilityKit, assetCounter);
+            var (markup, tooltipCdo) = await GetMarkupAsync(grantedAbilityKit, assetCounter);
 
             if (markup == null)
                 return null;
 
             var tokens = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
-            if (cdo != null)
-                await GetTokensAsync(cdo, tokens, assetCounter);
+            if (tooltipCdo != null)
+                await GetTokensAsync(tooltipCdo, tokens, assetCounter);
 
-            return FormatMarkup(markup, tokens);
+            return ApplyPatches(FormatMarkup(markup, tokens), tooltipCdo?.Name ?? grantedAbilityKit.Name);
         }
 
         public static async Task<string?> GetForActiveAbilityAsync(UBlueprintGeneratedClass gameplayAbilityClass, IAssetCounter assetCounter)
@@ -98,7 +98,7 @@ namespace BanjoBotAssets.Exporters.Helpers
                     .Replace("[Ability.Duration]", FormatAsRegular(abilityStats.Duration));
             }
 
-            return tooltipText;
+            return ApplyPatches(tooltipText, tooltipCdo.Name);
         }
 
         private static string FormatAsRegular(float? value)
@@ -285,6 +285,37 @@ namespace BanjoBotAssets.Exporters.Helpers
             markup = TokenRegex().Replace(markup, match => tokens.GetValueOrDefault(match.Groups[1].Value, match.Value));
             return TagRegex().Replace(markup, match => match.Groups[1].Value);
         }
+
+        //based on the General Inconsistencies section of https://trello.com/b/D8pTrVFC/the-bug-list-save-the-world
+        static string ApplyPatches(string text, string sourceObjectName) => (sourceObjectName switch
+        {
+            "Kit_Commando_QuickFingers_T02" => text.Replace("Quick Fingers+", "Quick Fingers"),
+            "Default__TT_Perk_H_EnergySiphon_T01_C" => text.Replace("shields", "Shields"),
+            "Default__TT_Perk_H_EnergySiphon_T02_C" => text.Replace("shields", "Shields").Replace("damage", "Damage"),
+            "Default__TT_Perk_H_BrainFreeze_T01_C" => text.Replace("freezes", "Freezes"),
+            "Default__TT_Perk_H_BrainFreeze_T02_C" => text.Replace("freezes", "Freezes").Replace("frozen", "Frozen").Replace("damage", "Damage"),
+            "Default__TT_Perk_H_SpaceTechnology_T02_C" => text.Replace("Energy Damage to", "Base Energy Damage to"),
+            "Default__TT_Perk_H_CorruptedAura_T01_C" => text.Replace("damage", "Damage"),
+            "Default__TT_Perk_H_PlasmaArc_T01_C" => text.Replace("zap", "Zap"),
+            "Default__TT_Perk_H_PlasmaArc_T02_C" => text.Replace("zap", "Zap"),
+            "Default__TT_Perk_H_AvastMaties_T02_C" => text.Replace("cannonballs", "Cannonballs"),
+            "Default__TT_Perk_H_CorrosiveStrikes_T01_C" => text.Replace("each", "per"),
+            "Default__TT_Perk_H_CorrosiveStrikes_T02_C" => text.Replace("each", "per"),
+            "Default__TT_Perk_H_MUSTPROTECT_T01_C" => text.Replace("shield", "Shield"),
+            "Default__TT_Perk_H_MUSTPROTECT_T02_C" => text.Replace("shield", "Shield"),
+            "Default__TT_Perk_H_DemoDerby_T01_C" => text.Replace("physical damage", "Physical Damage").Replace("tile", "tiles"),
+            "Default__TT_Perk_H_DemoDerby_T02_C" => text.Replace("physical damage", "Physical Damage").Replace("tile", "tiles"),
+            "Default__TT_Perk_H_FeelTheBASE_T01_C" => text.Replace("B.A.S.E. After", "B.A.S.E.. After"),
+            "Default__TT_Perk_H_FeelTheBASE_T02_C" => text.Replace("B.A.S.E. After", "B.A.S.E.. After"),
+            "Default__TT_Perk_H_UnderWarranty_T02_C" => text.Replace("energy damage", "Energy Damage"),
+            "Default__TT_Perk_H_OwMyEye_T02_C" => text.Replace("Energy damage", "Energy Damage"),
+            "Default__TT_Perk_H_SaurianFight_T01_C" => text.Replace("damage", "Damage"),
+            "Default__TT_Perk_H_SaurianFight_T02_C" => text.Replace("damage", "Damage"),
+            "Default__TT_Perk_H_SeismicStanza_T02_C" => text.Replace("damage", "Damage"),
+            "Default__TT_Perk_H_FromtheDepths_T01_C" => text.Replace("Energy damage", "Energy Damage"),
+            _ => text
+        }).Replace("  ", " ");
+
 
         [GeneratedRegex(@"\[(Ability\.Line\d+)\]", RegexOptions.Singleline | RegexOptions.CultureInvariant | RegexOptions.IgnoreCase)]
         private static partial Regex TokenRegex();

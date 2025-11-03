@@ -28,6 +28,7 @@ namespace BanjoBotAssets.UExports
         public FPackageIndex? ItemDefinition { get; set; }
 #pragma warning disable IDE1006 // Naming Styles
         public bool bOnlyApplyCostOnHit { get; set; }
+        public bool bRequireWeaponInInventory { get; set; }
 #pragma warning restore IDE1006 // Naming Styles
 
         public FFortAbilityCost(FStructFallback fallback)
@@ -36,6 +37,7 @@ namespace BanjoBotAssets.UExports
             CostValue = fallback.GetOrDefault<FScalableFloat>(nameof(CostValue));
             ItemDefinition = fallback.GetOrDefault<FPackageIndex>(nameof(ItemDefinition));
             bOnlyApplyCostOnHit = fallback.GetOrDefault<bool>(nameof(bOnlyApplyCostOnHit));
+            bRequireWeaponInInventory = fallback.GetOrDefault<bool>(nameof(bRequireWeaponInInventory));
         }
     }
 }

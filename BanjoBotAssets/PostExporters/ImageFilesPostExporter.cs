@@ -71,7 +71,6 @@ namespace BanjoBotAssets.PostExporters
 
                             if (wantExport == WantImageExport.ExternalPathOnly)
                                 continue;
-                            logger.LogInformation("bad");
 
                             if (!novel)
                             {

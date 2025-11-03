@@ -15,23 +15,13 @@
  * You should have received a copy of the GNU General Public License
  * along with BanjoBotAssets.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-using CUE4Parse.FN.Structs.GA;
-
 namespace BanjoBotAssets.Exporters.UObjects
 {
-    internal sealed class AmmoExporter(IExporterContext services) : UObjectExporter(services)
+    internal sealed class PersonalVehicleExporter(IExporterContext services) : UObjectExporter(services)
     {
-        protected override string Type => "Ammo";
+        protected override string Type => "PersonalVehicle";
 
-        protected override bool InterestedInAsset(string name)
-        {
-            if (name.Contains("/Athena/", StringComparison.OrdinalIgnoreCase))
-                return false;
-            if (name.Contains("/PrimalGameplay/", StringComparison.OrdinalIgnoreCase))
-                return false;
-
-            return name.Contains("/Items/Ammo/AmmoData", StringComparison.OrdinalIgnoreCase);
-        }
+        protected override bool InterestedInAsset(string name) => 
+            name.Contains("/VID_Hoverboard", StringComparison.OrdinalIgnoreCase);
     }
 }

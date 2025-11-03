@@ -63,6 +63,9 @@ namespace BanjoBotAssets
                     if (itemType is null)
                         continue;
 
+                    if (itemValue["AssetPath"]?.ToString() is string assetPath)
+                        itemValue["AssetPath"] = assetPath.ToLowerInvariant();
+
                     splitItems.TryAdd(itemType, []);
                     splitItems[itemType].TryAdd(itemKey, itemValue);
                     Console.WriteLine($"ported \"{itemValue?["DisplayName"]?.ToString()}\" to {itemType} object");
@@ -77,13 +80,13 @@ namespace BanjoBotAssets
             }
             ProcessItem();
 
-            Parallel.ForEach(resultDatabase, remainingData =>
+            foreach (var remainingData in resultDatabase)
             {
                 if (remainingData.Key == "NamedItems")
-                    return;
-                if(remainingData.Value is JsonObject || remainingData.Value is JsonArray)
+                    continue;
+                if (remainingData.Value is JsonObject || remainingData.Value is JsonArray)
                     splitNonItems.TryAdd(remainingData.Key, remainingData.Value);
-            });
+            }
 
             Directory.CreateDirectory($"{destinationDir.FullName}/NamedItems");
             foreach (var item in splitItems)
@@ -95,7 +98,7 @@ namespace BanjoBotAssets
                 }
                 FileInfo splitItemFile = new($"{destinationDir.FullName}/NamedItems/{item.Key}.json");
                 using var writer = splitItemFile.CreateText();
-                writer.WriteLine(new JsonObject(item.Value.AsEnumerable()).ToString());
+                writer.WriteLine(new JsonObject(item.Value.OrderBy(kvp=>kvp.Key).AsEnumerable()).ToString());
                 writer.Flush();
                 Console.WriteLine("saved json: " + item.Key);
             }

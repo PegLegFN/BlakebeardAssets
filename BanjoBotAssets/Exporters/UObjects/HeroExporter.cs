@@ -15,7 +15,9 @@
  * You should have received a copy of the GNU General Public License
  * along with BanjoBotAssets.  If not, see <http://www.gnu.org/licenses/>.
  */
+using CUE4Parse.UE4.Objects.Engine;
 using CUE4Parse.UE4.Objects.GameplayTags;
+using CUE4Parse.Utilities;
 using CUE4Parse.Utils;
 
 namespace BanjoBotAssets.Exporters.UObjects
@@ -92,14 +94,19 @@ namespace BanjoBotAssets.Exporters.UObjects
 
             var hgd = asset.HeroGameplayDefinition;
 
+            if (itemData.DisplayName == "MEGA B.A.S.E. Kyle")
+            {
+                itemData.Description = itemData.Description!.Replace("BASEs", "B.A.S.E.s");
+            }
+
             // hero/commander perk
-            var (heroPerkTemplate, heroPerkName, heroPerkDesc, heroPerkRequirement) = await GetPerkAsync(hgd, "HeroPerk");
+            var (heroPerkTemplate, heroPerkName, heroPerkDesc, heroPerkRequirement, heroPerk) = await GetPerkAsync(hgd, "HeroPerk");
             itemData.HeroPerkTemplate = heroPerkTemplate;
             itemData.HeroPerk = heroPerkName;
             itemData.HeroPerkDescription = heroPerkDesc;
             itemData.HeroPerkRequirement = heroPerkRequirement;
 
-            var (commanderPerkTemplate, commanderPerkName, commanderPerkDesc, _) = await GetPerkAsync(hgd, "CommanderPerk");
+            var (commanderPerkTemplate, commanderPerkName, commanderPerkDesc, _, commanderPerk) = await GetPerkAsync(hgd, "CommanderPerk");
             itemData.CommanderPerkTemplate = commanderPerkTemplate;
             itemData.CommanderPerk = commanderPerkName;
             itemData.CommanderPerkDescription = commanderPerkDesc;
@@ -116,6 +123,20 @@ namespace BanjoBotAssets.Exporters.UObjects
             // stat type
             var heroStatLineTags = hgd?.GetOrDefault<FGameplayTagContainer>("HeroBaseStatlineTags");
             itemData.HeroStatLine = heroStatLineTags?.GameplayTags[0].TagName.Text.Split('.')?[^1] ?? "<?>";
+
+            // tags
+            List<FGameplayTag> heroTags = [];
+            if (commanderPerk is not null)
+                heroTags.AddRange(await GetHeroAbilityTag(commanderPerk));
+            if (heroPerk is not null)
+                heroTags.AddRange(await GetHeroAbilityTag(heroPerk));
+            foreach (var ability in tierAbilityKits ?? [])
+            {
+                heroTags.AddRange(await GetHeroAbilityTag(ability));
+            }
+            if (hgd?.GetOrDefault<FGameplayTagContainer>("HeroTags").GameplayTags is FGameplayTag[] keywordTags)
+                heroTags.AddRange(keywordTags);
+            itemData.HeroTags = [..heroTags.Select(t => t.TagName.Text).Distinct()];
 
             return true;
         }
@@ -138,11 +159,11 @@ namespace BanjoBotAssets.Exporters.UObjects
             return Resources.Field_Hero_Unknown;
         }
 
-        private async Task<(string? templateId, string displayName, string description, PerkRequirement? requirement)> GetPerkAsync(UObject? gameplayDefinition, string perkProperty)
+        private async Task<(string? templateId, string displayName, string description, HeroPerkRequirement? requirement, FStructFallback? perk)> GetPerkAsync(UObject? gameplayDefinition, string perkProperty)
         {
             var perk = gameplayDefinition?.GetOrDefault<FStructFallback>(perkProperty);
             if (perk == null)
-                return (null, $"<{Resources.Field_Hero_NoGrantedAbility}>", $"<{Resources.Field_NoDescription}>", null);
+                return (null, $"<{Resources.Field_Hero_NoGrantedAbility}>", $"<{Resources.Field_NoDescription}>", null, null);
 
             Interlocked.Increment(ref assetsLoaded);
             var templateId = "Ability:"+perk.GetOrDefault<FSoftObjectPath>("GrantedAbilityKit").AssetPathName.Text.Split(".")[^1];
@@ -150,38 +171,65 @@ namespace BanjoBotAssets.Exporters.UObjects
             var displayName = grantedAbilityKit.GetOrDefault<FText>("ItemName")?.Text ?? grantedAbilityKit.GetOrDefault<FText>("DisplayName")?.Text ?? $"<{grantedAbilityKit.Name ?? Resources.Field_Hero_NoGrantedAbility}>";
             var description = await abilityDescription.GetForPerkAbilityKitAsync(grantedAbilityKit, this) ?? $"<{Resources.Field_NoDescription}>";
 
-            PerkRequirement? requirement = null;
-            if (perk.GetOrDefault<FStructFallback>("RequiredCommanderTagQuery") is FStructFallback commanderTagQuery)
+            HeroPerkRequirement? requirement = GetHeroPerkRequirement(perk);
+
+            return (templateId, displayName, description, requirement, perk);
+        }
+
+        public static HeroPerkRequirement? GetHeroPerkRequirement(AbstractPropertyHolder target, string tagQueryName = "RequiredCommanderTagQuery", string requirementTextName = "CommanderRequirementsText")
+        {
+            if (target?.GetOrDefault<FStructFallback>(tagQueryName) is not FStructFallback commanderTagQuery)
+                return null;
+
+            HeroPerkRequirement requirement = new()
             {
-                requirement = new PerkRequirement
-                {
-                    Description = perk.GetOrDefault<FText>("CommanderRequirementsText")?.Text ?? "",
-                };
+                Description = target.GetOrDefault<FText>(requirementTextName)?.Text ?? "",
+            };
 
-                // instead of parsing the TagDictionary and numeric QueryTokenStream, parse the textual AutoDescription
-                var expression = commanderTagQuery.GetOrDefault<string>("AutoDescription");
-                if (CommanderTagsQueryRegex().Match(expression) is { Success: true } match)
-                {
-                    var tags = match.Groups["tag"].Captures.Select(c => c.Value).ToArray();
+            // instead of parsing the TagDictionary and numeric QueryTokenStream, parse the textual AutoDescription
+            var expression = commanderTagQuery.GetOrDefault<string>("AutoDescription");
+            if (CommanderTagsQueryRegex().Match(expression) is not  { Success: true } match)
+                return requirement;
 
-                    // these are either hero ability tags (Granted.Ability.CLASSNAME.ABILITYNAME),
-                    // or class perk tags (Granted.Perk.CLASSNAME.PERKNAME[.*]) which we interpret as a class requirement
-                    if (tags.Length == 1 && tags[0].StartsWith("Granted.Perk.", StringComparison.OrdinalIgnoreCase))
-                    {
-                        requirement.CommanderSubType = tags[0].Split('.')[2];
-                    }
-                    else
-                    {
-                        requirement.CommanderTag = tags;
-                    }
-                }
+            var tags = match.Groups["tag"].Captures.Select(c => c.Value).ToArray();
+
+            // these are either hero ability tags (Granted.Ability.CLASSNAME.ABILITYNAME),
+            // or class perk tags (Granted.Perk.CLASSNAME.PERKNAME[.*]) which we interpret as a class requirement
+            if (tags.Length == 1 && tags[0].StartsWith("Granted.Perk.", StringComparison.OrdinalIgnoreCase))
+            {
+                requirement.CommanderSubType = tags[0].Split('.')[2];
+            }
+            else if (tags.Length == 1 && tags[0].StartsWith("Class.Is", StringComparison.OrdinalIgnoreCase))
+            {
+                requirement.CommanderSubType = tags[0].Split('.')[1][2..];
+            }
+            else
+            {
+                requirement.CommanderTag = tags;
             }
 
-            return (templateId, displayName, description, requirement);
+            return requirement;
         }
 
         private static string GetHeroAbilityID(FStructFallback kit) =>
             kit.GetSoftAssetPath("GrantedAbilityKit") is string s ? $"Ability:{s.SubstringAfterLast('.')}" : "";
+
+        private async Task<FGameplayTag[]> GetHeroAbilityTag(FStructFallback kit)
+        {
+            var kitObj = await kit.GetOrDefault<FSoftObjectPath>("GrantedAbilityKit").LoadAsync(provider);
+            var kitGEList = kitObj.GetOrDefault<FStructFallback[]>("GrantedGameplayEffects") ?? [];
+            List<FGameplayTag> tags = [];
+            foreach (var kitGEContainer in kitGEList)
+            {
+                var kitGE = kitGEContainer?.GetOrDefault<UBlueprintGeneratedClass>("GameplayEffect");
+                if (kitGE is null)
+                    continue;
+                var kitCDO = await kitGE.ClassDefaultObject.LoadAsync();
+                var kitTags = kitCDO?.GetOrDefault<FStructFallback>("InheritableOwnedTagsContainer");
+                tags.AddRange(kitTags?.GetOrDefault<FGameplayTagContainer>("CombinedTags").GameplayTags ?? []);
+            }
+            return [..tags];
+        }
 
         [GeneratedRegex("^\\s*(?:ANY|ALL)\\(\\s*(?<tag>[a-z0-9.]+)(?:\\s*,\\s*(?<tag>[a-z0-9.]+))*\\s*\\)\\s*$", RegexOptions.Singleline | RegexOptions.CultureInvariant | RegexOptions.IgnoreCase)]
         private static partial Regex CommanderTagsQueryRegex();

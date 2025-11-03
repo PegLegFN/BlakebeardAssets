@@ -111,7 +111,7 @@ namespace BanjoBotAssets
                     return hasCachedFallback && await LoadCachedMappings();
                 }
                 var json = JArray.Parse(jsonText);
-                var preferredCompression = _isWindows64Bit ? "Oodle" : "Brotli";
+                HashSet<string> preferredCompressions = [_isWindows64Bit ? "Oodle" : "Brotli", "Zstandard"];
 
                 if (!json.HasValues)
                 {
@@ -124,7 +124,7 @@ namespace BanjoBotAssets
                 foreach (var arrayEntry in json)
                 {
                     var method = arrayEntry["meta"]?["compressionMethod"]?.ToString();
-                    if (method != null && method == preferredCompression)
+                    if (method != null && preferredCompressions.Contains(method))
                     {
                         usmapUrl = arrayEntry["url"]?.ToString();
                         usmapName = arrayEntry["fileName"]?.ToString();

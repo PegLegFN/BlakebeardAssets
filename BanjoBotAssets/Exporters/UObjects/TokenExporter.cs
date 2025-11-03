@@ -15,12 +15,27 @@
  * You should have received a copy of the GNU General Public License
  * along with BanjoBotAssets.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 namespace BanjoBotAssets.Exporters.UObjects
 {
-    internal sealed class TokenExporter(IExporterContext services) : UObjectExporter(services)
+    internal sealed class TokenExporter(IExporterContext services) : UObjectExporter<UObject, TokenItemData>(services)
     {
         protected override string Type => "Token";
 
-        protected override bool InterestedInAsset(string name) => name.Contains("/Items/Tokens/", StringComparison.OrdinalIgnoreCase);
+        protected override bool InterestedInAsset(string name) => 
+            name.Contains("/Items/Tokens/", StringComparison.OrdinalIgnoreCase) ||
+            name.Contains("/STWAccolades/", StringComparison.OrdinalIgnoreCase);
+
+        protected override Task<bool> ExportAssetAsync(UObject asset, TokenItemData itemData, Dictionary<ImageType, string> imagePaths)
+        {
+            if (asset.TryGet("SoftWeeklyXPCap", out int xpCap))
+                itemData.SoftWeeklyXPCap = xpCap;
+            if (asset.TryGet("SoftCapMultiplier", out int capMult))
+                itemData.SoftCapMultiplier = capMult;
+            if (asset.TryGet("WeeklyResetOffsetHours", out int offset))
+                itemData.WeeklyResetOffsetHours = offset;
+
+            return Task.FromResult(true);
+        }
     }
 }

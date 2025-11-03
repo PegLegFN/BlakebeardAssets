@@ -23,6 +23,7 @@ using BanjoBotAssets.PostExporters;
 using CUE4Parse.Compression;
 using CUE4Parse.Encryption.Aes;
 using CUE4Parse.UE4.Objects.Core.Misc;
+using CUE4Parse.UE4.Versions;
 using Microsoft.Extensions.Options;
 using System.Collections.Concurrent;
 using System.Diagnostics;
@@ -356,7 +357,8 @@ namespace BanjoBotAssets
             provider.PostMount();
 
             logger.LogInformation(Resources.Status_LoadingLocalization, languageProvider.Language.ToString());
-            provider.LoadLocalization(languageProvider.Language, cancellationToken);
+            provider.ChangeCulture(provider.GetLanguageCode(languageProvider.Language));
+            //provider.LoadLocalization(languageProvider.Language, cancellationToken);
         }
     }
 }

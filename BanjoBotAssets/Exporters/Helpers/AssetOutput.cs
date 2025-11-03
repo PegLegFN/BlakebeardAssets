@@ -222,7 +222,7 @@ namespace BanjoBotAssets.Exporters.Helpers
                 {
                     var season = new VenturesSeason { EventTag = eventTag };
 
-                    foreach (var (_, data) in levels)
+                    foreach (var data in levels.Values.OrderBy(l => l.TotalRequiredXP))
                     {
                         var seasonLevel = new VenturesSeasonLevel()
                         {

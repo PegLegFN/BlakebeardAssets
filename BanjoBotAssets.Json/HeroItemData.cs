@@ -36,7 +36,9 @@ namespace BanjoBotAssets.Json
         [DisallowNull]
         public string? CommanderPerkDescription { get; set; }
         public string? UnlocksTeamPerk { get; set; }
-        public PerkRequirement? HeroPerkRequirement { get; set; }
+        public HeroPerkRequirement? HeroPerkRequirement { get; set; }
+        [DisallowNull]
+        public string[]? HeroTags { get; set; }
 
         [DisallowNull]
         public string[]? HeroAbilities { get; set; }
@@ -47,7 +49,7 @@ namespace BanjoBotAssets.Json
     /// Represents a requirement for a perk to be activated in a hero loadout.
     /// </summary>
     [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-    public sealed class PerkRequirement
+    public sealed class HeroPerkRequirement
     {
         public string Description { get; set; } = "";
         /// <summary>

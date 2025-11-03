@@ -297,9 +297,9 @@ namespace BanjoBotAssets.Exporters.UObjects
             return result;
         }
 
-        public static Dictionary<string, float> ConvertRawWeaponStats(FStructFallback row)
+        public static SortedDictionary<string, float> ConvertRawWeaponStats(FStructFallback row)
         {
-            Dictionary<string, float> result = [];
+            SortedDictionary<string, float> result = [];
             foreach (var tag in row.Properties)
             {
                 if(tag.PropertyType.Text == "FloatProperty")

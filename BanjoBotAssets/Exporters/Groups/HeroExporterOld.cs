@@ -22,7 +22,7 @@ namespace BanjoBotAssets.Exporters.Groups
 {
     internal sealed record HeroItemGroupFields(string DisplayName, string? Description, string? SubType,
         string HeroPerkName, string HeroPerk, string HeroPerkDescription, string CommanderPerkName, string CommanderPerk, string CommanderPerkDescription,
-        PerkRequirement? HeroPerkRequirement, string[] HeroAbilities, string HeroStatType)
+        HeroPerkRequirement? HeroPerkRequirement, string[] HeroAbilities, string HeroStatType)
         : BaseItemGroupFields(DisplayName, Description, SubType)
     {
         public HeroItemGroupFields() : this("", null, null, "", "", "", "", "", "", null, [], "") { }
@@ -126,7 +126,7 @@ namespace BanjoBotAssets.Exporters.Groups
             return base.GetRarity(parsedName, primaryAsset, fields);
         }
 
-        private async Task<(string perkName, string displayName, string description, PerkRequirement? requirement)> GetPerkAsync(UObject? gameplayDefinition, string perkProperty)
+        private async Task<(string perkName, string displayName, string description, HeroPerkRequirement? requirement)> GetPerkAsync(UObject? gameplayDefinition, string perkProperty)
         {
             var perk = gameplayDefinition?.GetOrDefault<FStructFallback>(perkProperty);
             if (perk == null)
@@ -138,10 +138,10 @@ namespace BanjoBotAssets.Exporters.Groups
             var displayName = grantedAbilityKit.GetOrDefault<FText>("ItemName")?.Text ?? grantedAbilityKit.GetOrDefault<FText>("DisplayName")?.Text ?? $"<{grantedAbilityKit.Name ?? Resources.Field_Hero_NoGrantedAbility}>";
             var description = await abilityDescription.GetForPerkAbilityKitAsync(grantedAbilityKit, this) ?? $"<{Resources.Field_NoDescription}>";
 
-            PerkRequirement? requirement = null;
+            HeroPerkRequirement? requirement = null;
             if (perk.GetOrDefault<FStructFallback>("RequiredCommanderTagQuery") is FStructFallback commanderTagQuery)
             {
-                requirement = new PerkRequirement
+                requirement = new HeroPerkRequirement
                 {
                     Description = perk.GetOrDefault<FText>("CommanderRequirementsText")?.Text ?? "",
                 };

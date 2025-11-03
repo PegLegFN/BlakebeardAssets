@@ -15,19 +15,62 @@
  * You should have received a copy of the GNU General Public License
  * along with BanjoBotAssets.  If not, see <http://www.gnu.org/licenses/>.
  */
+using CUE4Parse.FN.Enums.FortniteGame;
+using CUE4Parse.UE4.Objects.Engine;
+using CUE4Parse.Utilities;
+
 namespace BanjoBotAssets.Exporters.UObjects
 {
-    internal sealed class TeamPerkExporter(IExporterContext services) : UObjectExporter(services)
+    internal sealed partial class TeamPerkExporter(IExporterContext services) : UObjectExporter<UObject, TeamPerkItemData>(services)
     {
         protected override string Type => "TeamPerk";
 
         protected override bool InterestedInAsset(string name) => name.Contains("/TPID_", StringComparison.OrdinalIgnoreCase);
 
-        protected override async Task<bool> ExportAssetAsync(UObject asset, NamedItemData namedItemData, Dictionary<ImageType, string> imagePaths)
+        protected override async Task<bool> ExportAssetAsync(UObject asset, TeamPerkItemData teamPerkItemData, Dictionary<ImageType, string> imagePaths)
         {
             Interlocked.Increment(ref assetsLoaded);
             var grantedAbilityKit = await asset.GetOrDefault<FSoftObjectPath>("GrantedAbilityKit").LoadAsync(provider);
-            namedItemData.Description = await abilityDescription.GetForPerkAbilityKitAsync(grantedAbilityKit, this) ?? $"<{Resources.Field_NoDescription}>";
+            teamPerkItemData.Description = await abilityDescription.GetForPerkAbilityKitAsync(grantedAbilityKit, this) ?? $"<{Resources.Field_NoDescription}>";
+
+            teamPerkItemData.CommanderRequirement = HeroExporter.GetHeroPerkRequirement(asset);
+
+            string heroRequirementText = "";
+            if(asset.GetOrDefaultFromDataList<FSoftObjectPath?>("TooltipClass") is FSoftObjectPath ttPath)
+            {
+                var tooltipCDO = await (await ttPath.LoadAsync<UBlueprintGeneratedClass>(provider)).ClassDefaultObject.LoadAsync();
+                if(tooltipCDO?.GetOrDefault<FText>("Description").Text is string tooltip)
+                {
+                    heroRequirementText = TooltipMarkupTag().Replace(tooltip, "");
+                }
+            }
+
+            var loadoutConditionStruct = asset.GetOrDefault<FStructFallback[]>("TeamPerkLoadoutConditions")[0];
+            var supportRequirementTags = HeroExporter.GetHeroPerkRequirement(loadoutConditionStruct, "RequiredTagQuery");
+
+            TeamPerkRequirement supportRequirements = new()
+            {
+                Description = heroRequirementText,
+                HeroTags = supportRequirementTags?.CommanderTag,
+                HeroSubType = supportRequirementTags?.CommanderSubType,
+                MinimumQuantity = 1
+            };
+
+            if (loadoutConditionStruct.GetOrDefault<bool>("bConsiderMinimumRarity"))
+            {
+                supportRequirements.MinimumRarity = loadoutConditionStruct.GetOrDefault<EFortRarity>("MinimumHeroRarity").GetNameText().Text;
+            }
+
+            if (loadoutConditionStruct.GetOrDefault<bool>("bConsiderMinimumTier"))
+            {
+                supportRequirements.MinimumTier = (int)loadoutConditionStruct.GetOrDefault<EFortItemTier>("MinimumHeroTier");
+            }
+
+            teamPerkItemData.ProgressiveBonus = asset.GetOrDefault<bool>("bProgressiveBonus");
+            if (teamPerkItemData.ProgressiveBonus != true)
+                supportRequirements.MinimumQuantity = loadoutConditionStruct.GetOrDefault<int>("NumTimesSatisfiable");
+
+            teamPerkItemData.SupportRequirements = supportRequirements;
 
             if (grantedAbilityKit.GetResourceObjectPath("IconBrush") is string path)
             {
@@ -36,5 +79,8 @@ namespace BanjoBotAssets.Exporters.UObjects
 
             return true;
         }
+
+        [GeneratedRegex("<[^>]*>")]
+        private static partial Regex TooltipMarkupTag();
     }
 }

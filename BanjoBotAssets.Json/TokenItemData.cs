@@ -1,4 +1,10 @@
-﻿/* Copyright 2023 Tara "Dino" Cassatt
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+/* Copyright 2023 Tara "Dino" Cassatt
  * 
  * This file is part of BanjoBotAssets.
  * 
@@ -15,23 +21,17 @@
  * You should have received a copy of the GNU General Public License
  * along with BanjoBotAssets.  If not, see <http://www.gnu.org/licenses/>.
  */
+using Newtonsoft.Json;
+using System.Diagnostics.CodeAnalysis;
 
-using CUE4Parse.FN.Structs.GA;
-
-namespace BanjoBotAssets.Exporters.UObjects
+namespace BanjoBotAssets.Json
 {
-    internal sealed class AmmoExporter(IExporterContext services) : UObjectExporter(services)
+    [NamedItemData("Token")]
+    public sealed class TokenItemData : NamedItemData
     {
-        protected override string Type => "Ammo";
-
-        protected override bool InterestedInAsset(string name)
-        {
-            if (name.Contains("/Athena/", StringComparison.OrdinalIgnoreCase))
-                return false;
-            if (name.Contains("/PrimalGameplay/", StringComparison.OrdinalIgnoreCase))
-                return false;
-
-            return name.Contains("/Items/Ammo/AmmoData", StringComparison.OrdinalIgnoreCase);
-        }
+        public int? SoftWeeklyXPCap { get; set; }
+        public float? SoftCapMultiplier { get; set; }
+        public int? WeeklyResetOffsetHours { get; set; }
     }
 }
+

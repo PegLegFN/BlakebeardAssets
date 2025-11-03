@@ -179,8 +179,8 @@ namespace BanjoBotAssets.Exporters.UObjects
                 return;
             }
 
-            var abilityCosts = gaCdo.GetOrDefault<FFortAbilityCost[]>("AbilityCosts");
-            var staminaCost = abilityCosts?.SingleOrDefault(ac => ac.CostSource == EFortAbilityCostSource.Stamina);
+            var abilityCosts = gaCdo.GetOrDefault<FFortAbilityCost[]>("Costs");
+            var staminaCost = abilityCosts?.SingleOrDefault(ac => ac?.CostSource == EFortAbilityCostSource.Stamina);
             namedItemData.EnergyCost ??= staminaCost?.CostValue?.GetScaledValue(logger);
 
             // load from cooldown effect
