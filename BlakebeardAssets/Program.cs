@@ -1,19 +1,22 @@
-﻿/* Copyright 2023 Tara "Dino" Cassatt
+﻿/* Copyright 2026 Tomatech
+ * BanjoBotAssets: Copyright 2026 Tara "Dino" Cassatt
  * 
- * This file is part of BanjoBotAssets.
+ * This file is part of BlakebeardAssets.
  * 
- * BanjoBotAssets is free software: you can redistribute it and/or modify
+ * BlakebeardAssets is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  * 
- * BanjoBotAssets is distributed in the hope that it will be useful, but
+ * BlakebeardAssets is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
  * 
  * You should have received a copy of the GNU General Public License
- * along with BanjoBotAssets.  If not, see <http://www.gnu.org/licenses/>.
+ * along with BlakebeardAssets.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * BlakebeardAssets is based on BanjoBotAssets by Tara "Dino" Cassatt.
  */
 #pragma warning disable CA1852 // https://github.com/dotnet/roslyn-analyzers/issues/6141
 
