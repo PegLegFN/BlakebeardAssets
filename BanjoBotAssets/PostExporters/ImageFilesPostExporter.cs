@@ -86,7 +86,7 @@ namespace BanjoBotAssets.PostExporters
                                 continue;
                             }
 
-                            var bytes = bitmap.Encode(ETextureFormat.Png, out var ext);
+                            var bytes = bitmap.Encode(ETextureFormat.Png, false, out var ext);
                             if (ext != "png")
                             {
                                 logger.LogError(Resources.Error_CannotEncodeTexture, imagePath);

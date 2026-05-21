@@ -181,6 +181,11 @@ namespace BanjoBotAssets.Exporters.UObjects
                         itemData.Rarity = rarity.GetNameText().Text;
                     }
 
+                    if (uobject.GetOrDefaultFromDataList("Rarity", EFortRarity.Uncommon) is EFortRarity dlrarity && (RequireRarity || dlrarity != EFortRarity.Uncommon))
+                    {
+                        itemData.Rarity = dlrarity.GetNameText().Text;
+                    }
+
 
                     var evoHandle = uobject.GetOrDefault<FDataTableRowHandle[]>("ConversionRecipes", []).FirstOrDefault();
 

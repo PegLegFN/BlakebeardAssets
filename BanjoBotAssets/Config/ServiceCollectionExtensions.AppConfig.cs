@@ -45,7 +45,7 @@ namespace BanjoBotAssets.Extensions
                 .AddOptions<AesOptions>()
                 .Configure<IConfiguration>((options, config) =>
                 {
-                    options.AesApiUri = "https://fortnitecentral.genxgames.gg/api/v1/aes";
+                    options.AesApiUri = "https://api.fortniteapi.com/v1/aes";
                     options.LocalFilePath = "aes.json";
                     config.GetSection(nameof(AesOptions)).Bind(options);
                 });
@@ -192,7 +192,7 @@ namespace BanjoBotAssets.Extensions
             services.AddOptions<MappingsOptions>()
                 .Configure<IConfiguration>((options, config) =>
                 {
-                    options.MappingsApiUri = "https://fortnitecentral.genxgames.gg/api/v1/mappings";
+                    options.MappingsApiUri = "https://api.fortniteapi.com/v1/mappings";
                     options.LocalFilePath = "mappings.usmap";
                     config.GetSection(nameof(MappingsOptions)).Bind(options);
                 });

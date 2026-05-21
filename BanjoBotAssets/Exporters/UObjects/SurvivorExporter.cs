@@ -24,13 +24,15 @@ namespace BanjoBotAssets.Exporters.UObjects
     {
         protected override string Type => "Worker";
 
+        protected override bool RequireRarity => true;
+
         protected override bool InterestedInAsset(string name) =>
             name.Contains("Workers/Worker", StringComparison.OrdinalIgnoreCase) || name.Contains("Managers/Manager", StringComparison.OrdinalIgnoreCase);
 
         protected override async Task<bool> ExportAssetAsync(UFortWorkerType asset, SurvivorItemData itemData, Dictionary<ImageType, string> imagePaths)
         {
-            if (asset.GetOrDefault("Rarity", EFortRarity.Uncommon) is EFortRarity rarity)
-                itemData.Rarity = rarity.GetNameText().Text;
+            //if (asset.GetOrDefault("Rarity", EFortRarity.Uncommon) is EFortRarity rarity)
+            //    itemData.Rarity = rarity.GetNameText().Text;
             itemData.SubType = asset.bIsManager ? GetManagerJob(asset) : null;
             itemData.DisplayName = asset.ItemName?.Text ?? MakeSurvivorDisplayName(asset);
             itemData.Personality = asset.FixedPersonalityTag.GameplayTags is { Length: 1 }

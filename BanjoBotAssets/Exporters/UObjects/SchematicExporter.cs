@@ -194,7 +194,7 @@ namespace BanjoBotAssets.Exporters.UObjects
                 itemData.Category = "Ingredient";
             }
 
-            EFortRarity rarity = craftingResultItem.GetOrDefault("Rarity", EFortRarity.Uncommon);
+            EFortRarity rarity = craftingResultItem.GetOrDefaultFromDataList("Rarity", EFortRarity.Uncommon);
             itemData.Rarity = rarity.GetNameText().Text;
 
             imagePaths.Clear();

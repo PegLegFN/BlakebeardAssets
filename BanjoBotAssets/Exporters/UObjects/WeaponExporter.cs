@@ -20,8 +20,6 @@ using CUE4Parse.FN.Enums.FortniteGame;
 using CUE4Parse.UE4.Objects.GameplayTags;
 using CUE4Parse.Utilities;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Text.Json.Nodes;
 
 namespace BanjoBotAssets.Exporters.UObjects
 {
@@ -62,7 +60,8 @@ namespace BanjoBotAssets.Exporters.UObjects
                 return false;
 
             return
-                name.Contains("/WID_", StringComparison.OrdinalIgnoreCase);
+                name.Contains("/WID_", StringComparison.OrdinalIgnoreCase) ||
+                name.Contains("/PegLegWeapon_", StringComparison.OrdinalIgnoreCase);
         }
 
         public override async Task ExportAssetsAsync(IProgress<ExportProgress> progress, IAssetOutput output, CancellationToken cancellationToken)
