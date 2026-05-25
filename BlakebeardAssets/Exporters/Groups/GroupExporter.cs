@@ -17,7 +17,7 @@
  */
 using System.Collections.Concurrent;
 
-namespace BanjoBotAssets.Exporters.Groups
+namespace BlakebeardAssets.Exporters.Groups
 {
     internal record BaseParsedItemName(string BaseName, string Rarity, int Tier);
 

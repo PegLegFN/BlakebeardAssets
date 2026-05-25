@@ -15,13 +15,13 @@
  * You should have received a copy of the GNU General Public License
  * along with BanjoBotAssets.  If not, see <http://www.gnu.org/licenses/>.
  */
-using BanjoBotAssets.Config;
+using BlakebeardAssets.Config;
 using CUE4Parse.MappingsProvider;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json.Linq;
 using System.Runtime.InteropServices;
 
-namespace BanjoBotAssets
+namespace BlakebeardAssets
 {
     internal interface ITypeMappingsProviderFactory
     {

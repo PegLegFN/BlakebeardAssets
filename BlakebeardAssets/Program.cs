@@ -22,7 +22,7 @@
 
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using BanjoBotAssets.Config;
+using BlakebeardAssets.Config;
 
 [assembly: InternalsVisibleTo("BanjoBotAssets.SourceGenerators.Tests")]
 

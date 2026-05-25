@@ -17,7 +17,7 @@
  */
 using System.Diagnostics.CodeAnalysis;
 
-namespace BanjoBotAssets.Json
+namespace BlakebeardAssets.Json
 {
     [NamedItemData("Accolades")]
     public sealed class AccoladeItemData : NamedItemData

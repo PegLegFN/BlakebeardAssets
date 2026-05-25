@@ -18,7 +18,7 @@
 using CUE4Parse.UE4.Objects.GameplayTags;
 using CUE4Parse.Utils;
 
-namespace BanjoBotAssets.Exporters.Groups
+namespace BlakebeardAssets.Exporters.Groups
 {
     internal sealed record HeroItemGroupFields(string DisplayName, string? Description, string? SubType,
         string HeroPerkName, string HeroPerk, string HeroPerkDescription, string CommanderPerkName, string CommanderPerk, string CommanderPerkDescription,

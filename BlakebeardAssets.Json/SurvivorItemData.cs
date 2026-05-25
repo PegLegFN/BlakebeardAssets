@@ -16,7 +16,7 @@
  * along with BanjoBotAssets.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace BanjoBotAssets.Json
+namespace BlakebeardAssets.Json
 {
     [NamedItemData("Worker")]
     public sealed class SurvivorItemData : NamedItemData

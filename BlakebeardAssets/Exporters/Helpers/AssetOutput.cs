@@ -18,7 +18,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 
-namespace BanjoBotAssets.Exporters.Helpers
+namespace BlakebeardAssets.Exporters.Helpers
 {
     internal sealed class AssetOutput : IAssetOutput
     {

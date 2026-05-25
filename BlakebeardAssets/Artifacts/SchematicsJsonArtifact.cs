@@ -15,10 +15,10 @@
  * You should have received a copy of the GNU General Public License
  * along with BanjoBotAssets.  If not, see <http://www.gnu.org/licenses/>.
  */
-using BanjoBotAssets.Config;
+using BlakebeardAssets.Config;
 using Newtonsoft.Json;
 
-namespace BanjoBotAssets.Artifacts
+namespace BlakebeardAssets.Artifacts
 {
     internal sealed class SchematicsJsonArtifact(
         ExportedFileOptions options,

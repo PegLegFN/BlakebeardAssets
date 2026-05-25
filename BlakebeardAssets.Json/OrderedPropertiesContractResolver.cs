@@ -18,7 +18,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace BanjoBotAssets.Json
+namespace BlakebeardAssets.Json
 {
     public class OrderedPropertiesContractResolver : DefaultContractResolver
     {

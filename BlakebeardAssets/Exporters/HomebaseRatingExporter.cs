@@ -19,7 +19,7 @@ using CUE4Parse.UE4.Objects.Engine.Curves;
 using System.Collections.Concurrent;
 using System.Drawing;
 
-namespace BanjoBotAssets.Exporters
+namespace BlakebeardAssets.Exporters
 {
     internal class HomebaseRatingExporter(IExporterContext services) : BaseExporter(services)
     {

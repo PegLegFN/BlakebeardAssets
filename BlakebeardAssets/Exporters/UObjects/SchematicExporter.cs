@@ -15,8 +15,8 @@
  * You should have received a copy of the GNU General Public License
  * along with BanjoBotAssets.  If not, see <http://www.gnu.org/licenses/>.
  */
-using BanjoBotAssets.Exporters.Groups;
-using BanjoBotAssets.UExports;
+using BlakebeardAssets.Exporters.Groups;
+using BlakebeardAssets.UExports;
 using CUE4Parse.FN.Enums.FortniteGame;
 using CUE4Parse.UE4.Assets.Exports;
 using CUE4Parse.UE4.Objects.GameplayTags;
@@ -27,7 +27,7 @@ using System.Data;
 using System.IO;
 using System.Linq;
 
-namespace BanjoBotAssets.Exporters.UObjects
+namespace BlakebeardAssets.Exporters.UObjects
 {
     internal sealed partial class SchematicExporter(IExporterContext services) : UObjectExporter<UObject, SchematicItemData>(services)
     {

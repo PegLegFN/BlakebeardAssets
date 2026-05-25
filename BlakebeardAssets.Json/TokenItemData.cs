@@ -24,7 +24,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Diagnostics.CodeAnalysis;
 
-namespace BanjoBotAssets.Json
+namespace BlakebeardAssets.Json
 {
     [NamedItemData("Token")]
     public sealed class TokenItemData : NamedItemData

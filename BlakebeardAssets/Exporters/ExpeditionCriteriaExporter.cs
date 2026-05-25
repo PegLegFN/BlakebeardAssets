@@ -1,6 +1,6 @@
 ﻿using CUE4Parse.UE4.Objects.GameplayTags;
 
-namespace BanjoBotAssets.Exporters
+namespace BlakebeardAssets.Exporters
 {
     internal sealed class ExpeditionCriteriaExporter(IExporterContext services) : BaseExporter(services)
     {

@@ -16,7 +16,7 @@
  * along with BanjoBotAssets.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace BanjoBotAssets.UExports
+namespace BlakebeardAssets.UExports
 {
     public enum EFortAbilityCostSource : byte
     {

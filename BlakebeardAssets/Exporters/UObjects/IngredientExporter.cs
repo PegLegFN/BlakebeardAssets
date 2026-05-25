@@ -17,7 +17,7 @@
  */
 using CUE4Parse.FN.Exports.FortniteGame.NoProperties;
 
-namespace BanjoBotAssets.Exporters.UObjects
+namespace BlakebeardAssets.Exporters.UObjects
 {
     internal sealed class IngredientExporter(IExporterContext services) : UObjectExporter<UFortIngredientItemDefinition>(services)
     {

@@ -15,12 +15,12 @@
  * You should have received a copy of the GNU General Public License
  * along with BanjoBotAssets.  If not, see <http://www.gnu.org/licenses/>.
  */
-using BanjoBotAssets.UExports;
+using BlakebeardAssets.UExports;
 using CUE4Parse.FN.Enums.FortniteGame;
 using CUE4Parse.UE4.Objects.GameplayTags;
 using System.Collections.Concurrent;
 
-namespace BanjoBotAssets.Exporters.Groups
+namespace BlakebeardAssets.Exporters.Groups
 {
     internal sealed record ParsedSchematicName(string BaseName, string Rarity, int Tier, string EvoType)
         : BaseParsedItemName(BaseName, Rarity, Tier);

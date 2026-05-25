@@ -19,7 +19,7 @@
 
 using System.Text.Json.Serialization;
 
-namespace BanjoBotAssets.Aes
+namespace BlakebeardAssets.Aes
 {
     public class AesApiResponse
     {

@@ -21,7 +21,7 @@ using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("BanjoBotAssets.SourceGenerators.Tests")]
 
-namespace BanjoBotAssets.Json
+namespace BlakebeardAssets.Json
 {
     public sealed partial class NamedItemDataConverter : JsonConverter
     {

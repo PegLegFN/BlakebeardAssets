@@ -15,16 +15,16 @@
  * You should have received a copy of the GNU General Public License
  * along with BanjoBotAssets.  If not, see <http://www.gnu.org/licenses/>.
  */
-using BanjoBotAssets.Exporters.Helpers;
-using BanjoBotAssets.Json;
-using BanjoBotAssets.UExports;
+using BlakebeardAssets.Exporters.Helpers;
+using BlakebeardAssets.Json;
+using BlakebeardAssets.UExports;
 using CUE4Parse.FN.Structs.GA;
 using CUE4Parse.UE4.Assets.Objects.Properties;
 using CUE4Parse.UE4.Objects.Engine;
 using CUE4Parse.Utilities;
 using System.Data;
 
-namespace BanjoBotAssets.Exporters.UObjects
+namespace BlakebeardAssets.Exporters.UObjects
 {
     internal sealed class AbilityExporter(IExporterContext services) : UObjectExporter<UObject, AbilityItemData>(services)
     {

@@ -20,7 +20,7 @@ using CUE4Parse.UE4.Objects.GameplayTags;
 using CUE4Parse.Utilities;
 using CUE4Parse.Utils;
 
-namespace BanjoBotAssets.Exporters.UObjects
+namespace BlakebeardAssets.Exporters.UObjects
 {
     internal sealed partial class HeroExporter(IExporterContext services) : UObjectExporter<UFortHeroType, HeroItemData>(services)
     {

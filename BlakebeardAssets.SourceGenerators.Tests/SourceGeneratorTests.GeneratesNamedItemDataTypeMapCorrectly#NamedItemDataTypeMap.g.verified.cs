@@ -1,6 +1,6 @@
 ﻿//HintName: NamedItemDataTypeMap.g.cs
 #nullable enable
-namespace BanjoBotAssets.Json
+namespace BlakebeardAssets.Json
 {
     partial class NamedItemDataConverter
     {

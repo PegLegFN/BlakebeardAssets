@@ -21,7 +21,7 @@ using CUE4Parse.UE4.Versions;
 using Microsoft.Extensions.Caching.Memory;
 using System.Collections.Concurrent;
 
-namespace BanjoBotAssets
+namespace BlakebeardAssets
 {
     internal sealed class CachingFileProvider : DefaultFileProvider
     {

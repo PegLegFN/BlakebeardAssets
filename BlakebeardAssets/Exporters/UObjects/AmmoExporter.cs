@@ -18,7 +18,7 @@
 
 using CUE4Parse.FN.Structs.GA;
 
-namespace BanjoBotAssets.Exporters.UObjects
+namespace BlakebeardAssets.Exporters.UObjects
 {
     internal sealed class AmmoExporter(IExporterContext services) : UObjectExporter(services)
     {

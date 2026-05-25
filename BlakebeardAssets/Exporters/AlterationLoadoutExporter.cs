@@ -16,14 +16,14 @@
  * along with BanjoBotAssets.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-using BanjoBotAssets.Json;
-using BanjoBotAssets.UExports;
+using BlakebeardAssets.Json;
+using BlakebeardAssets.UExports;
 using Org.BouncyCastle.Asn1.Cms;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text.Json;
 
-namespace BanjoBotAssets.Exporters
+namespace BlakebeardAssets.Exporters
 {
     internal sealed class AlterationLoadoutExporter(IExporterContext services) : BaseExporter(services)
     {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BanjoBotAssets.Json
+namespace BlakebeardAssets.Json
 {
     public sealed class ExpeditionCriteria
     {

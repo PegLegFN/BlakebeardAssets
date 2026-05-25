@@ -18,7 +18,7 @@
 
 // TODO: export LevelData and DisplayType
 
-namespace BanjoBotAssets.Exporters.UObjects
+namespace BlakebeardAssets.Exporters.UObjects
 {
     internal sealed class HomebaseNodeExporter(IExporterContext services) : UObjectExporter<UFortHomebaseNodeItemDefinition>(services)
     {

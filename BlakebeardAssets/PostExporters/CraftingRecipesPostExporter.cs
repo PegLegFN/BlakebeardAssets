@@ -16,7 +16,7 @@
  * along with BanjoBotAssets.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace BanjoBotAssets.PostExporters
+namespace BlakebeardAssets.PostExporters
 {
     internal sealed class CraftingRecipesPostExporter : IPostExporter
     {

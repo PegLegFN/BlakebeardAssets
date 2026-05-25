@@ -19,7 +19,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System.Reflection;
 
-namespace BanjoBotAssets.Json
+namespace BlakebeardAssets.Json
 {
     internal sealed class ImagePathsContractResolver(bool wantImagePaths) : OrderedPropertiesContractResolver
     {

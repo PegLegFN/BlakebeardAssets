@@ -15,11 +15,11 @@
  * You should have received a copy of the GNU General Public License
  * along with BanjoBotAssets.  If not, see <http://www.gnu.org/licenses/>.
  */
-using BanjoBotAssets.Config;
+using BlakebeardAssets.Config;
 using Microsoft.Extensions.Options;
 using System.Text.Json;
 
-namespace BanjoBotAssets.Aes
+namespace BlakebeardAssets.Aes
 {
     internal sealed class FileAesProvider(ILogger<FileAesProvider> logger, IOptions<AesOptions> options, GameDirectoryProvider gameDirectoryProvider) : IAesProvider, IAesCacheUpdater
     {

@@ -15,13 +15,13 @@
  * You should have received a copy of the GNU General Public License
  * along with BanjoBotAssets.  If not, see <http://www.gnu.org/licenses/>.
  */
-using BanjoBotAssets.Config;
+using BlakebeardAssets.Config;
 using LazyCache;
 using LazyCache.Providers;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
 
-namespace BanjoBotAssets
+namespace BlakebeardAssets
 {
     internal sealed class AssetCache : IDisposable
     {

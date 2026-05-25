@@ -17,7 +17,7 @@
  */
 using System.Linq.Expressions;
 
-namespace BanjoBotAssets.Extensions
+namespace BlakebeardAssets.Extensions
 {
     internal static class UDataTableExtensions
     {

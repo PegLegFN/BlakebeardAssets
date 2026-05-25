@@ -19,7 +19,7 @@ using Newtonsoft.Json;
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
-namespace BanjoBotAssets.Json
+namespace BlakebeardAssets.Json
 {
     [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
     [JsonConverter(typeof(NamedItemDataConverter))]

@@ -17,7 +17,7 @@
  */
 using CUE4Parse.UE4.Assets.Utils;
 
-namespace BanjoBotAssets.UExports
+namespace BlakebeardAssets.UExports
 {
     /// <summary>
     /// Like <see cref="FGameplayEffectApplicationInfo"/>, but the reference to the <see cref="GameplayEffect"/>

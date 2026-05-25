@@ -17,7 +17,7 @@
  */
 using System.ComponentModel.DataAnnotations;
 
-namespace BanjoBotAssets.Config
+namespace BlakebeardAssets.Config
 {
     internal sealed class AesOptions
     {

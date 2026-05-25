@@ -15,11 +15,11 @@
  * You should have received a copy of the GNU General Public License
  * along with BanjoBotAssets.  If not, see <http://www.gnu.org/licenses/>.
  */
-using BanjoBotAssets.Aes;
-using BanjoBotAssets.Artifacts;
-using BanjoBotAssets.Config;
-using BanjoBotAssets.Exporters;
-using BanjoBotAssets.PostExporters;
+using BlakebeardAssets.Aes;
+using BlakebeardAssets.Artifacts;
+using BlakebeardAssets.Config;
+using BlakebeardAssets.Exporters;
+using BlakebeardAssets.PostExporters;
 using CUE4Parse.Compression;
 using CUE4Parse.Encryption.Aes;
 using CUE4Parse.UE4.Objects.Core.Misc;
@@ -29,7 +29,7 @@ using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 
-namespace BanjoBotAssets
+namespace BlakebeardAssets
 {
     internal sealed partial class AssetExportService(
         ILogger<AssetExportService> logger,

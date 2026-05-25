@@ -16,7 +16,7 @@
  * along with BanjoBotAssets.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace BanjoBotAssets.Exporters.UObjects
+namespace BlakebeardAssets.Exporters.UObjects
 {
     internal sealed class TokenExporter(IExporterContext services) : UObjectExporter<UObject, TokenItemData>(services)
     {

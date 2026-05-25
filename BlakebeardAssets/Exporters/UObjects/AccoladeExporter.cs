@@ -18,7 +18,7 @@
 
 using CUE4Parse.FN.Structs.GA;
 
-namespace BanjoBotAssets.Exporters.UObjects
+namespace BlakebeardAssets.Exporters.UObjects
 {
     internal sealed class AccoladeExporter(IExporterContext services) : UObjectExporter<UObject, AccoladeItemData>(services)
     {

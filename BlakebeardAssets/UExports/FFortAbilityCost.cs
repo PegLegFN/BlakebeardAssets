@@ -18,7 +18,7 @@
 using CUE4Parse.FN.Structs.GA;
 using CUE4Parse.UE4.Assets.Utils;
 
-namespace BanjoBotAssets.UExports
+namespace BlakebeardAssets.UExports
 {
     [StructFallback]
     public class FFortAbilityCost

@@ -18,14 +18,14 @@
  *
  * BlakebeardAssets is based on BanjoBotAssets by Tara "Dino" Cassatt.
  */
-using BanjoBotAssets.Exporters;
+using BlakebeardAssets.Exporters;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using CUE4Parse.UE4.Assets.Exports;
-using BanjoBotAssets.Json;
+using BlakebeardAssets.Json;
 
-namespace BanjoBotAssets.SourceGenerators.Tests
+namespace BlakebeardAssets.SourceGenerators.Tests
 {
     [TestClass]
     public class SourceGeneratorTests : VerifyBase
@@ -70,8 +70,8 @@ namespace BanjoBotAssets.SourceGenerators.Tests
         public Task GeneratesExporterRegistrationCorrectly()
         {
             var source = @"
-using BanjoBotAssets.Exporters.Helpers;
-namespace BanjoBotAssets.Exporters.UObjects;
+using BlakebeardAssets.Exporters.Helpers;
+namespace BlakebeardAssets.Exporters.UObjects;
 class TestExporter(IExporterContext services) : UObjectExporter(services)
 {
     protected override string Type => ""Test"";
@@ -85,7 +85,7 @@ class TestExporter(IExporterContext services) : UObjectExporter(services)
         public Task GeneratesNamedItemDataTypeMapCorrectly()
         {
             var source = @"
-namespace BanjoBotAssets.Json;
+namespace BlakebeardAssets.Json;
 
 [NamedItemData(""Foo"")]
 public class FooNamedItemData : NamedItemData

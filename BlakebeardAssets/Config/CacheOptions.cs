@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with BanjoBotAssets.  If not, see <http://www.gnu.org/licenses/>.
  */
-namespace BanjoBotAssets.Config
+namespace BlakebeardAssets.Config
 {
     internal sealed class CacheOptions
     {

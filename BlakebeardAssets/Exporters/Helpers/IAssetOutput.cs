@@ -17,7 +17,7 @@
  */
 using System.Collections.Generic;
 
-namespace BanjoBotAssets.Exporters.Helpers
+namespace BlakebeardAssets.Exporters.Helpers
 {
     internal interface IAssetOutput
     {

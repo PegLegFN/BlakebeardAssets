@@ -18,7 +18,7 @@
 using CUE4Parse.FN.Structs.CoreUObject;
 using CUE4Parse.UE4.Objects.GameplayTags;
 
-namespace BanjoBotAssets.Exporters
+namespace BlakebeardAssets.Exporters
 {
     internal sealed class QuestMapExporter(IExporterContext services) : BaseExporter(services)
     {

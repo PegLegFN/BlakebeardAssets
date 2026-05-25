@@ -18,7 +18,7 @@
 using CUE4Parse.UE4.Objects.Engine;
 using System.Collections.Concurrent;
 
-namespace BanjoBotAssets.Exporters.Blueprints
+namespace BlakebeardAssets.Exporters.Blueprints
 {
     internal abstract class BlueprintExporter(IExporterContext services) : BaseExporter(services)
     {

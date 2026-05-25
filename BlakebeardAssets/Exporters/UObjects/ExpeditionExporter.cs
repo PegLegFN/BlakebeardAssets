@@ -1,6 +1,6 @@
-﻿using BanjoBotAssets.UExports;
+﻿using BlakebeardAssets.UExports;
 
-namespace BanjoBotAssets.Exporters.UObjects
+namespace BlakebeardAssets.Exporters.UObjects
 {
     internal sealed class ExpeditionExporter(IExporterContext services) : UObjectExporter<UObject, ExpeditionItemData>(services)
     {

@@ -18,7 +18,7 @@
 
 using CUE4Parse.UE4.Assets.Exports;
 
-namespace BanjoBotAssets.Exporters.UObjects
+namespace BlakebeardAssets.Exporters.UObjects
 {
     internal sealed class SurvivorExporter(IExporterContext services) : UObjectExporter<UFortWorkerType, SurvivorItemData>(services)
     {

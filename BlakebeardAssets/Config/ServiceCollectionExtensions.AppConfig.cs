@@ -15,17 +15,17 @@
  * You should have received a copy of the GNU General Public License
  * along with BanjoBotAssets.  If not, see <http://www.gnu.org/licenses/>.
  */
-using BanjoBotAssets.Aes;
-using BanjoBotAssets.Artifacts;
-using BanjoBotAssets.Config;
-using BanjoBotAssets.Exporters;
-using BanjoBotAssets.PostExporters;
+using BlakebeardAssets.Aes;
+using BlakebeardAssets.Artifacts;
+using BlakebeardAssets.Config;
+using BlakebeardAssets.Exporters;
+using BlakebeardAssets.PostExporters;
 using CUE4Parse.UE4.Versions;
 using Microsoft.Extensions.Options;
 using Serilog;
 using Serilog.Sinks.ILogger;
 
-namespace BanjoBotAssets.Extensions
+namespace BlakebeardAssets.Extensions
 {
     internal static partial class ServiceCollectionExtensions
     {

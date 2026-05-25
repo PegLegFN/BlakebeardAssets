@@ -19,7 +19,7 @@ using Newtonsoft.Json;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 
-namespace BanjoBotAssets.Json
+namespace BlakebeardAssets.Json
 {
     public sealed class ItemRecipe
     {

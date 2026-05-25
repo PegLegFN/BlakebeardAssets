@@ -17,7 +17,7 @@
  */
 using System.Text;
 
-namespace BanjoBotAssets.Properties
+namespace BlakebeardAssets.Properties
 {
     /// <summary>
     /// Contains CompositeFormat instances used throughout the application.

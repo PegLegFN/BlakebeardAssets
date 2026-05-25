@@ -17,7 +17,7 @@
  */
 using Microsoft.Extensions.Options;
 
-namespace BanjoBotAssets.Extensions
+namespace BlakebeardAssets.Extensions
 {
     internal static partial class ServiceCollectionExtensions
     {

@@ -15,11 +15,11 @@
  * You should have received a copy of the GNU General Public License
  * along with BanjoBotAssets.  If not, see <http://www.gnu.org/licenses/>.
  */
-using BanjoBotAssets.Exporters.Blueprints;
-using BanjoBotAssets.Exporters.Groups;
-using BanjoBotAssets.Exporters.UObjects;
+using BlakebeardAssets.Exporters.Blueprints;
+using BlakebeardAssets.Exporters.Groups;
+using BlakebeardAssets.Exporters.UObjects;
 
-namespace BanjoBotAssets.Config
+namespace BlakebeardAssets.Config
 {
     public class ScopeOptions
     {

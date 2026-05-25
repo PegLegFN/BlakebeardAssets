@@ -17,7 +17,7 @@
  */
 // TODO: fix Halloween survivors all getting the same name: they should be separated by rarity (WorkerHalloween_VR_T04 is Lobber, WorkerHalloween_UC_T01 is Husky, etc.)
 
-namespace BanjoBotAssets.Exporters.Groups
+namespace BlakebeardAssets.Exporters.Groups
 {
     internal sealed record SurvivorItemGroupFields(string DisplayName, string? Description, string? SubType,
         string? Personality) : BaseItemGroupFields(DisplayName, Description, SubType)

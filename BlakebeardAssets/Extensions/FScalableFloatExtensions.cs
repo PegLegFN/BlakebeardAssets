@@ -18,7 +18,7 @@
 using CUE4Parse.FN.Structs.GA;
 using CUE4Parse.UE4.Objects.Engine.Curves;
 
-namespace BanjoBotAssets.Extensions
+namespace BlakebeardAssets.Extensions
 {
     internal static class FScalableFloatExtensions
     {

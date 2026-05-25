@@ -17,7 +17,7 @@
  */
 using System.Diagnostics.CodeAnalysis;
 
-namespace BanjoBotAssets.Json
+namespace BlakebeardAssets.Json
 {
     [NamedItemData("Quest")]
     public sealed class QuestItemData : NamedItemData

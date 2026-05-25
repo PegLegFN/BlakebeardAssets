@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text.Json.Nodes;
 
-namespace BanjoBotAssets
+namespace BlakebeardAssets
 {
     internal static class PegLegPostProcessor
     {

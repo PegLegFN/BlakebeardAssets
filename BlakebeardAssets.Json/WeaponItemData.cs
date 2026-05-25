@@ -18,7 +18,7 @@
 using Newtonsoft.Json;
 using System.Text.Json.Nodes;
 
-namespace BanjoBotAssets.Json
+namespace BlakebeardAssets.Json
 {
     [NamedItemData("Weapon")]
     public sealed class WeaponItemData : NamedItemData

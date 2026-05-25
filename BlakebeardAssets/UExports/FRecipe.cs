@@ -18,7 +18,7 @@
 using CUE4Parse.UE4.Assets.Utils;
 using CUE4Parse.UE4.Objects.GameplayTags;
 
-namespace BanjoBotAssets.UExports
+namespace BlakebeardAssets.UExports
 {
     [StructFallback]
     public class FRecipe

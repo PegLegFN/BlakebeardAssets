@@ -18,7 +18,7 @@
 
 using CUE4Parse.UE4.Objects.Engine.Curves;
 
-namespace BanjoBotAssets.Exporters
+namespace BlakebeardAssets.Exporters
 {
     internal sealed partial class HeroStatExporter(IExporterContext services) : BaseExporter(services)
     {

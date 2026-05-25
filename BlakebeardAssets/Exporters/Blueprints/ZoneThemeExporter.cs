@@ -17,7 +17,7 @@
  */
 using CUE4Parse.UE4.Objects.Engine;
 
-namespace BanjoBotAssets.Exporters.Blueprints
+namespace BlakebeardAssets.Exporters.Blueprints
 {
     internal sealed class ZoneThemeExporter(IExporterContext services) : BlueprintExporter(services)
     {

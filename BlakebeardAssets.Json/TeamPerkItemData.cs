@@ -18,7 +18,7 @@
 using Newtonsoft.Json;
 using System.Diagnostics.CodeAnalysis;
 
-namespace BanjoBotAssets.Json
+namespace BlakebeardAssets.Json
 {
     [NamedItemData("TeamPerk")]
     public sealed class TeamPerkItemData : NamedItemData

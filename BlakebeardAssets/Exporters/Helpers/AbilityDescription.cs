@@ -19,7 +19,7 @@ using CUE4Parse.FN.Structs.GA;
 using CUE4Parse.UE4.Assets.Objects.Properties;
 using CUE4Parse.UE4.Objects.Engine;
 
-namespace BanjoBotAssets.Exporters.Helpers
+namespace BlakebeardAssets.Exporters.Helpers
 {
     internal sealed partial class AbilityDescription(ILogger<AbilityDescription> logger)
     {

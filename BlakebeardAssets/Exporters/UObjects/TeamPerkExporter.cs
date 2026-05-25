@@ -19,7 +19,7 @@ using CUE4Parse.FN.Enums.FortniteGame;
 using CUE4Parse.UE4.Objects.Engine;
 using CUE4Parse.Utilities;
 
-namespace BanjoBotAssets.Exporters.UObjects
+namespace BlakebeardAssets.Exporters.UObjects
 {
     internal sealed partial class TeamPerkExporter(IExporterContext services) : UObjectExporter<UObject, TeamPerkItemData>(services)
     {

@@ -1,5 +1,5 @@
 ﻿//HintName: ExporterRegistration.g.cs
-namespace BanjoBotAssets.Extensions
+namespace BlakebeardAssets.Extensions
 {
     using Microsoft.Extensions.DependencyInjection;
     internal static partial class ServiceCollectionExtensions

@@ -17,7 +17,7 @@
  */
 using CUE4Parse.UE4.Objects.Engine;
 
-namespace BanjoBotAssets.Exporters.UObjects
+namespace BlakebeardAssets.Exporters.UObjects
 {
     internal sealed class GadgetExporter(IExporterContext services) : UObjectExporter<UFortGadgetItemDefinition>(services)
     {

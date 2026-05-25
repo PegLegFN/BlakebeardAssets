@@ -17,7 +17,7 @@
  */
 using CUE4Parse.UE4.AssetRegistry;
 
-namespace BanjoBotAssets.Exporters
+namespace BlakebeardAssets.Exporters
 {
     /// <summary>
     /// Extracts the display names of weapons and traps so they can be applied to the exported schematics.
