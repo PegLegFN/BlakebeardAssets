@@ -64,14 +64,14 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\BanjoBotAssets.Json\BanjoBotAssets.Json.csproj" />
+	  <ProjectReference Include="..\BlakebeardAssets.Json\BlakebeardAssets.Json.csproj" />
 	  <ProjectReference Include="..\external\CUE4Parse-FortniteTypes\CUE4Parse-FortniteTypes.csproj" />
 	  <ProjectReference Include="..\external\CUE4Parse\CUE4Parse-Conversion\CUE4Parse-Conversion.csproj" />
 	  <ProjectReference Include="..\external\CUE4Parse\CUE4Parse\CUE4Parse.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\BanjoBotAssets.SourceGenerators\BanjoBotAssets.SourceGenerators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+		<ProjectReference Include="..\BlakebeardAssets.SourceGenerators\BlakebeardAssets.SourceGenerators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
 	</ItemGroup>
 
 	<ItemGroup>

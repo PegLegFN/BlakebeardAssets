@@ -29,8 +29,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BanjoBotAssets.SourceGenerators\BanjoBotAssets.SourceGenerators.csproj" />
-    <ProjectReference Include="..\BanjoBotAssets\BanjoBotAssets.csproj" />
+    <ProjectReference Include="..\BlakebeardAssets.SourceGenerators\BlakebeardAssets.SourceGenerators.csproj" />
+    <ProjectReference Include="..\BlakebeardAssets\BlakebeardAssets.csproj" />
   </ItemGroup>
 
   <ItemGroup>
