@@ -24,7 +24,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using BlakebeardAssets.Config;
 
-[assembly: InternalsVisibleTo("BanjoBotAssets.SourceGenerators.Tests")]
+[assembly: InternalsVisibleTo("BlakebeardAssets.SourceGenerators.Tests")]
 
 // TODO: export per-difficulty stat clamp tables (GameDifficultyGrowthBounds, CombatStatClampsPerTheater)
 // TODO: export collection book categories and recruitment/research/voucher options (CollectionBookSlots)

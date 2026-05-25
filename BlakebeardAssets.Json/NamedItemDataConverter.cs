@@ -19,7 +19,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("BanjoBotAssets.SourceGenerators.Tests")]
+[assembly: InternalsVisibleTo("BlakebeardAssets.SourceGenerators.Tests")]
 
 namespace BlakebeardAssets.Json
 {

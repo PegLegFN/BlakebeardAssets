@@ -183,11 +183,11 @@ namespace BlakebeardAssets
         {
             logger.LogInformation(Resources.Status_LocatingOodle);
 
-            await OodleHelper.DownloadOodleDllAsync(OodleHelper.OODLE_DLL_NAME);
+            await OodleHelper.DownloadOodleDllAsync();
 
             logger.LogInformation(Resources.Status_InitializingOodle);
 
-            OodleHelper.Initialize(OodleHelper.OODLE_DLL_NAME);
+            OodleHelper.Initialize();
         }
 
         private void LoadVirtualPaths()

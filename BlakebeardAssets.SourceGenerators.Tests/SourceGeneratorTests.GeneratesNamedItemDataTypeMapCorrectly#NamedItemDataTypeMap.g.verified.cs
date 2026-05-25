@@ -16,8 +16,8 @@ namespace BlakebeardAssets.Json
         /// otherwise, <c>null</c>.</returns>
         private static NamedItemData? CreateNamedItemDataFromTypeField(string discriminator) => discriminator switch
         {
-            "Bar" => new global::BanjoBotAssets.Json.BarNamedItemData(),
-            "Foo" => new global::BanjoBotAssets.Json.FooNamedItemData(),
+            "Bar" => new global::BlakebeardAssets.Json.BarNamedItemData(),
+            "Foo" => new global::BlakebeardAssets.Json.FooNamedItemData(),
             _ => null,
         };
     }

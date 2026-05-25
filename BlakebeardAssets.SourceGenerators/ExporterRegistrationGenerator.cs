@@ -25,15 +25,15 @@ namespace BlakebeardAssets.SourceGenerators
     [Generator]
     public class ExporterRegistrationGenerator : IIncrementalGenerator
     {
-        private const string TargetNamespace = "BanjoBotAssets.Extensions";
+        private const string TargetNamespace = "BlakebeardAssets.Extensions";
 
         private const string TargetClass = "ServiceCollectionExtensions";
 
         private const string TargetMethod = "AddExporterServices";
 
-        private const string ExporterInterface = "global::BanjoBotAssets.Exporters.IExporter";
+        private const string ExporterInterface = "global::BlakebeardAssets.Exporters.IExporter";
 
-        private const string BaseExporterClass = "global::BanjoBotAssets.Exporters.BaseExporter";
+        private const string BaseExporterClass = "global::BlakebeardAssets.Exporters.BaseExporter";
 
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {

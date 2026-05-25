@@ -53,7 +53,7 @@ namespace BlakebeardAssets.SourceGenerators.Tests
 
             // reuse the same assembly name since BanjoBotAssets has an InternalsVisibleTo attribute for us
             var compilation = CSharpCompilation.Create(
-                assemblyName: "BanjoBotAssets.SourceGenerators.Tests",
+                assemblyName: "BlakebeardAssets.SourceGenerators.Tests",
                 syntaxTrees: [syntaxTree],
                 references: references,
                 options: new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));

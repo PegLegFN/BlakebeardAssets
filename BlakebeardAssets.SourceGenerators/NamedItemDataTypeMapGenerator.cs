@@ -25,13 +25,13 @@ namespace BlakebeardAssets.SourceGenerators
     [Generator]
     public class NamedItemDataTypeMapGenerator : IIncrementalGenerator
     {
-        private const string TargetNamespace = "BanjoBotAssets.Json";
+        private const string TargetNamespace = "BlakebeardAssets.Json";
 
         private const string TargetClass = "NamedItemDataConverter";
 
         private const string TargetMethod = "CreateNamedItemDataFromTypeField";
 
-        private const string NamedItemDataAttribute = "BanjoBotAssets.Json.NamedItemDataAttribute";
+        private const string NamedItemDataAttribute = "BlakebeardAssets.Json.NamedItemDataAttribute"; 
 
         private record NamedItemDataToGenerate(string TypeFieldDiscriminator, string TypeName);
 
