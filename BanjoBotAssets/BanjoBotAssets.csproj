@@ -1,0 +1,98 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<NeutralLanguage>en-US</NeutralLanguage>
+		<AnalysisLevel>latest-recommended</AnalysisLevel>
+		<EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
+		<RepositoryUrl>https://github.com/BanjoByTheBay/BanjoBotAssets.git</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageProjectUrl>https://github.com/BanjoByTheBay/BanjoBotAssets</PackageProjectUrl>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Using Include="CUE4Parse.FileProvider.Vfs" />
+		<Using Include="CUE4Parse.FN.Exports.FortniteGame" />
+		<Using Include="CUE4Parse.FN.Structs.Engine" />
+		<Using Include="CUE4Parse.FN.Structs.FortniteGame" />
+		<Using Include="CUE4Parse.GameTypes.FN.Enums" />
+		<Using Include="CUE4Parse.UE4.Assets" />
+		<Using Include="CUE4Parse.UE4.Assets.Exports" />
+		<Using Include="CUE4Parse.UE4.Assets.Exports.Engine" />
+		<Using Include="CUE4Parse.UE4.Assets.Objects" />
+		<Using Include="CUE4Parse.UE4.Objects.Core.i18N" />
+		<Using Include="CUE4Parse.UE4.Objects.UObject" />
+		<Using Include="System.Globalization" />
+		<Using Include="System.Text.RegularExpressions" />
+		<Using Include="BanjoBotAssets" />
+		<Using Include="BanjoBotAssets.Exporters.Helpers" />
+		<Using Include="BanjoBotAssets.Extensions" />
+		<Using Include="BanjoBotAssets.Json" />
+		<Using Include="BanjoBotAssets.PostExporters.Helpers" />
+		<Using Include="BanjoBotAssets.Properties" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Remove="*.dll" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Remove="aes.json" />
+		<Content Remove="assets.json" />
+		<Content Remove="schematics.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Remove="mappings.usmap" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="LazyCache" Version="2.4.0" />
+		<PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="9.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Http" Version="9.0.0" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+		<PackageReference Include="Roslynator.Analyzers" Version="4.12.10">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Serilog.Sinks.ILogger" Version="1.0.3" />
+		<PackageReference Include="System.Drawing.Common" Version="4.7.3" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\BanjoBotAssets.Json\BanjoBotAssets.Json.csproj" />
+	  <ProjectReference Include="..\external\CUE4Parse-FortniteTypes\CUE4Parse-FortniteTypes.csproj" />
+	  <ProjectReference Include="..\external\CUE4Parse\CUE4Parse-Conversion\CUE4Parse-Conversion.csproj" />
+	  <ProjectReference Include="..\external\CUE4Parse\CUE4Parse\CUE4Parse.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\BanjoBotAssets.SourceGenerators\BanjoBotAssets.SourceGenerators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="Properties\Resources.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Resources.resx</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Update="appsettings.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Update="Properties\Resources.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>Resources.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+	</ItemGroup>
+
+</Project>
