@@ -23,6 +23,12 @@ using BanjoBotAssets.Config;
 
 [assembly: InternalsVisibleTo("BanjoBotAssets.SourceGenerators.Tests")]
 
+namespace BanjoBotAssets;
+
+internal class OldProgram
+{
+    internal async Task<int> Main(string[] args)
+    {
 // TODO: export per-difficulty stat clamp tables (GameDifficultyGrowthBounds, CombatStatClampsPerTheater)
 // TODO: export collection book categories and recruitment/research/voucher options (CollectionBookSlots)
 #if !RELEASE
@@ -75,3 +81,5 @@ if (Console.ReadLine() != "skip")
 }
 
 return Environment.ExitCode;
+    }
+}

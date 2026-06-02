@@ -54,6 +54,7 @@ namespace BanjoBotAssets.Exporters.UObjects
         {
             progress.Report(new ExportProgress
             {
+                ExportType = $"UObject.{Type}",
                 TotalSteps = numToProcess,
                 CompletedSteps = processedSoFar,
                 AssetsLoaded = assetsLoaded,
@@ -104,8 +105,7 @@ namespace BanjoBotAssets.Exporters.UObjects
                     TAsset? uobject;
                     if (IgnoreLoadFailures)
                     {
-                        IPackage? pkg = null;
-
+                        IPackage pkg;
                         try
                         {
                             pkg = await provider.LoadPackageAsync(file);
@@ -117,11 +117,11 @@ namespace BanjoBotAssets.Exporters.UObjects
 
                         cancellationToken.ThrowIfCancellationRequested();
 
-                        if (pkg?.GetExportOrNull(file.NameWithoutExtension, StringComparison.OrdinalIgnoreCase) is TAsset asset)
+                        if (pkg.GetExportOrNull(file.NameWithoutExtension, StringComparison.OrdinalIgnoreCase) is TAsset asset)
                         {
                             uobject = asset;
                         }
-                        else if (pkg?.GetExportOrNull(file.NameWithoutExtension + "_C", StringComparison.OrdinalIgnoreCase) is TAsset assetC)
+                        else if (pkg.GetExportOrNull(file.NameWithoutExtension + "_C", StringComparison.OrdinalIgnoreCase) is TAsset assetC)
                         {
                             uobject = assetC;
                         }

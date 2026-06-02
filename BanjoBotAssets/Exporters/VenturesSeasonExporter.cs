@@ -56,8 +56,10 @@ namespace BanjoBotAssets.Exporters
             ExportPastLevelXPRequirements(await defaultGameDataTask, output, cancellationToken);
         }
 
-        private static void ExportPastLevelXPRequirements(UObject defaultGameData, IAssetOutput output, CancellationToken cancellationToken)
+        private static void ExportPastLevelXPRequirements(UObject? defaultGameData, IAssetOutput output, CancellationToken cancellationToken)
         {
+            if (defaultGameData is null)
+                return;
             cancellationToken.ThrowIfCancellationRequested();
 
             var map = defaultGameData.Get<UScriptMap>("PhoenixEventOverlevelXPPerLevel");
@@ -70,8 +72,10 @@ namespace BanjoBotAssets.Exporters
             }
         }
 
-        private static void ExportLevelRewards(UDataTable levelRewardsTable, IAssetOutput output, CancellationToken cancellationToken = default)
+        private static void ExportLevelRewards(UDataTable? levelRewardsTable, IAssetOutput output, CancellationToken cancellationToken = default)
         {
+            if (levelRewardsTable is null)
+                return;
             int level = 1;
 
             foreach (var (key, row) in levelRewardsTable.RowMap)
@@ -111,8 +115,10 @@ namespace BanjoBotAssets.Exporters
             }
         }
 
-        private static void ExportPastLevelRewards(UDataTable pastLevelRewardsTable, IAssetOutput output, CancellationToken cancellationToken = default)
+        private static void ExportPastLevelRewards(UDataTable? pastLevelRewardsTable, IAssetOutput output, CancellationToken cancellationToken = default)
         {
+            if (pastLevelRewardsTable is null)
+                return;
             int pastLevel = 1;
 
             foreach (var (key, row) in pastLevelRewardsTable.RowMap)

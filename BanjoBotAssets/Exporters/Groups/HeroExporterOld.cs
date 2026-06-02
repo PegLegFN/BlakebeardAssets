@@ -175,8 +175,8 @@ namespace BanjoBotAssets.Exporters.Groups
         {
             if (itemToQuestPath != null && questRewardsPath != null)
             {
-                var itemToQuestTask = provider.SafeLoadPackageObjectAsync<UDataTable>(provider.Files[itemToQuestPath].PathWithoutExtension);
-                var questRewardsTask = provider.SafeLoadPackageObjectAsync<UDataTable>(provider.Files[questRewardsPath].PathWithoutExtension);
+                var itemToQuestTask = provider.LoadPackageObjectAsync<UDataTable>(provider.Files[itemToQuestPath].PathWithoutExtension);
+                var questRewardsTask = provider.LoadPackageObjectAsync<UDataTable>(provider.Files[questRewardsPath].PathWithoutExtension);
 
                 var itemToQuestTable = await itemToQuestTask;
                 var questRewardsTable = await questRewardsTask;
